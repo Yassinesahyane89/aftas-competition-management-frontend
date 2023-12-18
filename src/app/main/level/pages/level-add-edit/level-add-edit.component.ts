@@ -22,6 +22,14 @@ export class LevelAddEditComponent implements OnInit {
         private router: Router,
   ) { }
 
+  // get level by id
+  getLevelById(id) {
+    this.levelListService.getLevelById(id).subscribe((response: any) => {
+        this.description = response.data.description;
+        this.point = response.data.point;
+    });
+  }
+
 
   ngOnInit(): void {
 
