@@ -53,6 +53,29 @@ export class LevelAddEditComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    // content header
+    this.contentHeader = {
+      headerTitle: this.pageType === 'add' ? 'Add New Level' : 'Edit Level',
+      actionButton: true,
+      breadcrumb: {
+        type: '',
+        links: [
+          {
+            name: 'Home',
+            isLink: true,
+            link: '/'
+          },
+          {
+            name: 'Level',
+            isLink: true,
+            link: '/level/list'
+          },
+          {
+            name: this.pageType === 'add' ? 'Add New Level' : 'Edit Level',
+            isLink: false
+          }
+        ]
+      }
+    };
   }
 }
