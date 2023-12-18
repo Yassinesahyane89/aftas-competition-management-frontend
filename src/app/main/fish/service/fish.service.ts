@@ -21,4 +21,9 @@ export class FishService {
     getFishById(id) {
         return this.http.get(environment.fishsUrl + '/' + id);
     }
+
+    // add fish
+    addFish(fish) {
+        return this.http.post(environment.fishsUrl, fish);
+    }
 }
