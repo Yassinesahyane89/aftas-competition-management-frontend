@@ -7,7 +7,7 @@ import {LevelService} from "../../service/level.service";
 
 import { cloneDeep } from 'lodash';
 import { ToastrService, GlobalConfig } from 'ngx-toastr';
-import { CustomToastrComponent } from './custom-toastr/custom-toastr.component';
+import { CustomToastrComponent } from '@core/components/custom-toastr/custom-toastr.component';
 
 
 @Component({
