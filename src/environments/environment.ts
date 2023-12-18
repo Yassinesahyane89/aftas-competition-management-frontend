@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   hmr: false,
   apiUrl: 'http://localhost:4000',
-  levelsUrl: 'http://localhost:8080/levels',
+  levelsUrl: 'http://localhost:8080/api/v1/levels',
 };
 
 /*
