@@ -31,11 +31,16 @@ export class LevelListComponent implements OnInit {
     this.table.offset = 0;
   }
 
-  ngOnInit(): void {
+  // get all level method
+  getAllLevel() {
     this.levelService.getAllLevel().subscribe((response: any) => {
       this.levelList = response.data;
       this.tempData = this.levelList;
     });
+  }
+
+  ngOnInit(): void {
+    this.getAllLevel();
   }
 
 }
