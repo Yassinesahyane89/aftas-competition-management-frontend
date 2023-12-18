@@ -29,4 +29,17 @@ export class FishAddEditComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    // get level list
+    getLevelList() {
+        this.levelService.getAllLevel().
+        subscribe(
+            (response: any) => {
+            this.levelOptions = response.data;
+        },
+        (error) => {
+            this.router.navigate([`/fish/list`]);
+        }
+        );
+    }
+
 }
