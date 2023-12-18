@@ -15,7 +15,6 @@ import { CoreDirectivesModule } from "@core/directives/directives";
 // fish
 import { FishListComponent } from "./pages/fish-list/fish-list.component";
 import {FishAddEditComponent} from "./pages/fish-add-edit/fish-add-edit.component";
-import { CustomToastrComponent } from  '@core/components/custom-toastr/custom-toastr.component';
 
 const routes: Routes = [
     {

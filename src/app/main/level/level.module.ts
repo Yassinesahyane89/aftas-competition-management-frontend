@@ -15,7 +15,6 @@ import { CoreDirectivesModule } from "@core/directives/directives";
 // level
 import { LevelListComponent } from "./pages/level-list/level-list.component";
 import {LevelAddEditComponent} from "./pages/level-add-edit/level-add-edit.component";
-import { CustomToastrComponent } from  '@core/components/custom-toastr/custom-toastr.component';
 
 // routing
 const routes: Routes = [
