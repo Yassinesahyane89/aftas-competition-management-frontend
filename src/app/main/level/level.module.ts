@@ -33,7 +33,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [LevelListComponent, LevelAddEditComponent],
   imports: [
-    CommonModule
+      CommonModule,
+      RouterModule.forChild(routes),
   ]
 })
 export class LevelModule { }
