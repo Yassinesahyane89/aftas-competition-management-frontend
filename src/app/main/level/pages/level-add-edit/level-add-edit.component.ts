@@ -40,6 +40,17 @@ export class LevelAddEditComponent implements OnInit {
         return this.levelListService.addLevel({description: this.description, point: this.point})
     }
 
+    // check if page is add or edit
+    checkPageType() {
+      if (window.location.href.indexOf('add') > -1) {
+        this.pageType = 'add';
+      } else {
+        this.levelId = + (this.route.snapshot.paramMap.get('id'));
+        this.getLevelById(this.levelId);
+        this.pageType = 'edit';
+      }
+    }
+
 
   ngOnInit(): void {
 
