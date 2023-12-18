@@ -11,4 +11,9 @@ export class FishService {
   constructor(
     private http: HttpClient
   ) { }
+
+  //get all fish
+  getAllFish() {
+      return this.http.get(environment.fishsUrl);
+  }
 }
