@@ -18,6 +18,7 @@ import { coreConfig } from 'app/app-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
+import {CustomToastrComponent} from "../@core/components/custom-toastr/custom-toastr.component";
 
 const appRoutes: Routes = [
   {
@@ -44,7 +45,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,CustomToastrComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

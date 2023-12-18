@@ -41,7 +41,7 @@ const routes: Routes = [
     },
   ];
 @NgModule({
-  declarations: [LevelListComponent, LevelAddEditComponent, CustomToastrComponent],
+  declarations: [LevelListComponent, LevelAddEditComponent],
   imports: [
         CommonModule,
         RouterModule.forChild(routes),

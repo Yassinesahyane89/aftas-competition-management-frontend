@@ -40,7 +40,7 @@ const routes: Routes = [
     },
 ];
 @NgModule({
-  declarations: [FishAddEditComponent, FishListComponent, CustomToastrComponent],
+  declarations: [FishAddEditComponent, FishListComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
