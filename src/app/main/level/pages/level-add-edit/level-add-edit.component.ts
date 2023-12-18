@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {LevelService} from "../../service/level.service";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 
 @Component({
@@ -25,10 +26,16 @@ export class LevelAddEditComponent implements OnInit {
 
   // get level by id
   getLevelById(id) {
-    this.levelListService.getLevelById(id).subscribe((response: any) => {
+    this.levelListService.getLevelById(id).
+    subscribe(
+        (response: any) => {
         this.description = response.data.description;
         this.point = response.data.point;
-    });
+    },
+    (error) => {
+      this.router.navigate([`/level/list`]);
+    }
+    );
   }
 
   // update level
