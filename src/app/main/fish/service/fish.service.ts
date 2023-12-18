@@ -6,14 +6,19 @@ import {environment} from "../../../../environments/environment";
   providedIn: 'root'
 })
 export class FishService {
-  public FishList: any ;
+    public FishList: any ;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+    constructor(
+      private http: HttpClient
+    ) { }
 
-  //get all fish
-  getAllFish() {
-      return this.http.get(environment.fishsUrl);
-  }
+    //get all fish
+    getAllFish() {
+        return this.http.get(environment.fishsUrl);
+    }
+
+    //get fish by id
+    getFishById(id) {
+        return this.http.get(environment.fishsUrl + '/' + id);
+    }
 }
