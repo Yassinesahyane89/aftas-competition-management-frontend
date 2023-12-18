@@ -4,7 +4,9 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule, Routes, Router } from "@angular/router";
 import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
 
+
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { ToastrModule } from 'ngx-toastr';
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 
 import { CoreCommonModule } from "@core/common.module";
@@ -13,6 +15,7 @@ import { CoreDirectivesModule } from "@core/directives/directives";
 // level
 import { LevelListComponent } from "./pages/level-list/level-list.component";
 import {LevelAddEditComponent} from "./pages/level-add-edit/level-add-edit.component";
+import { CustomToastrComponent } from  './pages/level-add-edit/custom-toastr/custom-toastr.component';
 
 // routing
 const routes: Routes = [
@@ -24,7 +27,7 @@ const routes: Routes = [
     {
         path: "add",
         component: LevelAddEditComponent,
-        data: { animation: "LevelAddEditComponent" },
+        data: { animation: "toastr" },
     },
     {
         path: "edit/:id",
@@ -38,7 +41,7 @@ const routes: Routes = [
     },
   ];
 @NgModule({
-  declarations: [LevelListComponent, LevelAddEditComponent],
+  declarations: [LevelListComponent, LevelAddEditComponent, CustomToastrComponent],
   imports: [
         CommonModule,
         RouterModule.forChild(routes),
@@ -47,7 +50,8 @@ const routes: Routes = [
         NgbModule,
         CoreCommonModule,
         CoreDirectivesModule,
-        ContentHeaderModule
+        ContentHeaderModule,
+        ToastrModule
   ]
 })
 export class LevelModule { }
