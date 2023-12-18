@@ -17,7 +17,12 @@ export class FishAddEditComponent implements OnInit {
     public name = "";
     public weight : number;
     public levelId : number;
-    public levelOptions: { id: number, description: string }[] = [];
+    public levelList: any = [];
+    public levelOptions: {
+        id: number,
+        level: string,
+        point: number,
+    }[];
     public selectedLevelId: number= null;
     public pageType: string;
     public pageTitle: string;
@@ -32,14 +37,13 @@ export class FishAddEditComponent implements OnInit {
     // get level list
     getLevelList() {
         this.levelService.getAllLevel().
-        subscribe(
-            (response: any) => {
-            this.levelOptions = response.data;
-        },
-        (error) => {
-            this.router.navigate([`/fish/list`]);
-        }
-        );
+        subscribe((response: any) => {
+            this.levelList = response.data;
+            this.levelList.forEach((level) => {
+                level.level = 'Level ' + level.code;
+            });
+            this.levelOptions = this.levelList;
+        });
     }
 
     // get fish by id
