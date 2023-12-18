@@ -43,4 +43,30 @@ export const menu: CoreMenu[] = [
         }
         ]
     },
+    // fish
+    {
+        id: 'fishes',
+        title: 'Fish',
+        translate: 'MENU.APPS.FISH.COLLAPSIBLE',
+        type: 'collapsible',
+        icon: 'bar-chart-2',
+        children: [
+        {
+            id: 'list',
+            title: 'List',
+            translate: 'MENU.APPS.FISH.LIST',
+            type: 'item',
+            icon: 'circle',
+            url: 'fish/list'
+        },
+        {
+            id: 'add',
+            title: 'Add',
+            translate: 'MENU.APPS.FISH.ADD',
+            type: 'item',
+            icon: 'circle',
+            url: 'fish/add'
+        }
+        ]
+    },
 ]
