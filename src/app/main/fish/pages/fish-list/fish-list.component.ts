@@ -49,6 +49,12 @@ export class FishListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getAllFish();
+    }
+
+    EditFish(row:any): void {
+        const fishId = row.id;
+        this.router.navigate([`/fish/edit/${fishId}`]);
     }
 
 }
