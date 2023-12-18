@@ -41,7 +41,7 @@ export class FishListComponent implements OnInit {
             this.fishList = response.data;
             // add to fishList.level an attribute called 'level' with value 'level' +code
             this.fishList.forEach((fish) => {
-                fish.level.level = 'Level ' + fish.code;
+                fish.level.level = 'Level ' + fish.level.code;
             });
 
             this.tempData = this.fishList;
