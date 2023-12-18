@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 import { RouterModule, Routes, Router } from "@angular/router";
 
+
+import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 
 // level
 import { LevelListComponent } from "./pages/level-list/level-list.component";
@@ -33,8 +36,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [LevelListComponent, LevelAddEditComponent],
   imports: [
-      CommonModule,
-      RouterModule.forChild(routes),
+        CommonModule,
+        RouterModule.forChild(routes),
+        NgxDatatableModule,
+        FormsModule,
   ]
 })
 export class LevelModule { }
