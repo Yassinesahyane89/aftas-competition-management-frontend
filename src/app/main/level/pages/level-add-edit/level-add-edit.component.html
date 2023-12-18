@@ -52,7 +52,7 @@
                                         <span *ngIf="levelForm.submitted && PointRef.invalid" class="invalid-form">
                                               <small class="form-text text-danger" *ngIf="PointRef.errors.required">This field is required!</small>
                                             </span>
-                                        <span *ngIf="levelForm.controls['point'].errors?.required" class="invalid-form">
+                                        <span *ngIf="levelForm.controls['point'].errors?.serverError" class="invalid-form">
                                               <small class="form-text text-danger">{{ levelForm.controls['point'].errors.serverError }}</small>
                                             </span>
                                     </div>
