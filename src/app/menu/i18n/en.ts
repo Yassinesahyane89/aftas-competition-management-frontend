@@ -11,6 +11,12 @@ export const locale = {
           EDIT: 'Edit',
           ADD: 'Add'
         },
+        FISH: {
+          COLLAPSIBLE: 'Fish',
+          LIST: 'List',
+          EDIT: 'Edit',
+          ADD: 'Add'
+        },
       }
     },
   }
