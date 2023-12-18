@@ -31,4 +31,9 @@ export class FishService {
     updateFish(fish) {
         return this.http.put(environment.fishsUrl + '/' + fish.id, fish);
     }
+
+    // delete fish
+    deleteFish(id) {
+        return this.http.delete(environment.fishsUrl + '/' + id);
+    }
 }
