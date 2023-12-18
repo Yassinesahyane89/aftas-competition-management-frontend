@@ -7,6 +7,7 @@ export const environment = {
   hmr: false,
   apiUrl: 'http://localhost:4000',
   levelsUrl: 'http://localhost:8080/api/v1/levels',
+  fishsUrl: 'http://localhost:8080/api/v1/fishes',
 };
 
 /*
