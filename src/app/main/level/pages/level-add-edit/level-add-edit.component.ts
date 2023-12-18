@@ -107,8 +107,9 @@ export class LevelAddEditComponent implements OnInit {
 
     // handle error case
     handleError(error,form) {
-        if (error && error.status && error.error && error.error.message) {
-
+        if (error.error && error.error.message) {
+            console.log(error.error.message);
+            console.log(",jdfsj");
           const customToastrRef = cloneDeep(this.options);
           customToastrRef.toastComponent = CustomToastrComponent;
           customToastrRef.closeButton = true;
@@ -125,7 +126,9 @@ export class LevelAddEditComponent implements OnInit {
             if (control) {
               control.setErrors({serverError: validationErrors[key].join(', ')});
             }
+              console.log(form.controls['point'])
           });
+
 
             this.description = form.value['description'];
             this.point = form.value['point'];
