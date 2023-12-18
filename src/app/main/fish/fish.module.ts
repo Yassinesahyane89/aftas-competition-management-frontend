@@ -18,6 +18,26 @@ import {FishAddEditComponent} from "./pages/fish-add-edit/fish-add-edit.componen
 import { CustomToastrComponent } from  '@core/components/custom-toastr/custom-toastr.component';
 
 const routes: Routes = [
+    {
+        path: "list",
+        component: FishListComponent,
+        data: { animation: "FishListComponent" },
+    },
+    {
+        path: "add",
+        component: FishAddEditComponent,
+        data: { animation: "toastr" },
+    },
+    {
+        path: "edit/:id",
+        component: FishAddEditComponent,
+        data: { animation: "FishAddEditComponent" },
+    },
+    {
+        path: "**",
+        redirectTo: "list",
+        pathMatch: "full",
+    },
 ];
 @NgModule({
   declarations: [FishAddEditComponent, FishListComponent, CustomToastrComponent],
