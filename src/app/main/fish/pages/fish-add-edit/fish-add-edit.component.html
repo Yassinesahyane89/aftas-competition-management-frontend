@@ -1,1 +1,79 @@
-<p>fish-add-edit works!</p>
+<script src="../fish-edit/fish-edit.component.ts"></script>
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+        <!-- Fish Form -->
+        <section id="simple-validation" class="card mt-1">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="card-title m-2">Add new Fish</h4>
+                    <div class="card-body">
+                        <form class="form-horizontal" (ngSubmit)="(fishForm.form.valid)" #fishForm="ngForm">
+                            <div class="row mb-1">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="basic-icon-default-name">Name</label>
+                                        <input
+                                                type="text"
+                                                class="form-control dt-name"
+                                                id="basic-icon-default-name"
+                                                placeholder="enter name"
+                                                name="name"
+                                                [(ngModel)]="name"
+                                                [class.error]="fishForm.submitted && NameRef.invalid"
+                                                #NameRef="ngModel"
+                                                required
+                                                aria-label="name"
+                                                aria-describedby="basic-icon-default-name2"
+                                        />
+                                        <span *ngIf="fishForm.submitted && NameRef.invalid" class="invalid-form">
+                                            <small class="form-text text-danger">This field is required!</small>
+                                        </span>
+                                        <span *ngIf="fishForm.controls['name'].errors?.serverError" class="invalid-form">
+                                            <small class="form-text text-danger">{{ fishForm.controls['name'].errors.serverError }}</small>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="basic-icon-default-weight">Weight</label>
+                                        <input
+                                                type="number"
+                                                id="basic-icon-default-weight"
+                                                class="form-control dt-weight"
+                                                placeholder="enter weight"
+                                                aria-label="weight"
+                                                aria-describedby="basic-icon-default-weight2"
+                                                name="weight"
+                                                [(ngModel)]="weight"
+                                                [class.error]="fishForm.submitted && WeightRef.invalid"
+                                                #WeightRef="ngModel"
+                                                required
+                                        />
+                                        <span *ngIf="fishForm.submitted && WeightRef.invalid" class="invalid-form">
+                                              <small class="form-text text-danger" *ngIf="WeightRef.errors.required">This field is required!</small>
+                                            </span>
+                                        <span *ngIf="fishForm.controls['weight'].errors?.serverError" class="invalid-form">
+                                              <small class="form-text text-danger">{{ fishForm.controls['weight'].errors.serverError }}</small>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="level">Level</label>
+                                        <select class="form-control" [(ngModel)]="selectedLevelId" name="levelId" id="level">
+                                            <option *ngFor="let option of levelOptions" [value]="option.id">{{ option.level + ' ->   Point :' + option.point }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-1" (click)="submit(fishForm)" rippleEffect>Submit</button>
+                            <button type="reset" class="btn btn-outline-secondary" rippleEffect><a routerLink='/fish/list'>Cancel</a></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--/ Fish Form -->
+    </div>
+</div>
