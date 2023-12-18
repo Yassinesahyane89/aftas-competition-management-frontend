@@ -39,14 +39,15 @@
                     </div>
                 </div>
                 <ngx-datatable class="bootstrap core-bootstrap" [rows]="levelList" [rowHeight]="50" [limit]="selectedOption" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" [scrollbarH]="true">
-                    <ngx-datatable-column name="Id" prop="id" [width]="50">
-                        <ng-template let-id="value" ngx-datatable-cell-template>
+                    <ngx-datatable-column name="Code" prop="code" [width]="50">
+                        <ng-template let-code="value" ngx-datatable-cell-template>
                             <div class="badge badge-info">
                                 <i data-feather="key" class="mr-25"></i>
-                                <span>{{id}}</span>
+                                <span>{{code}}</span>
                             </div>
                         </ng-template>
                     </ngx-datatable-column>
+                    <ngx-datatable-column name="Level" prop="level" [width]="200"></ngx-datatable-column>
                     <ngx-datatable-column name="Description" prop="description" [width]="200"></ngx-datatable-column>
                     <ngx-datatable-column name="Point" prop="point" [width]="50">
                         <ng-template let-point="value" ngx-datatable-cell-template>

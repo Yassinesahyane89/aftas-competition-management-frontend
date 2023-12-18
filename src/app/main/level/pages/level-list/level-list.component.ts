@@ -36,6 +36,10 @@ export class LevelListComponent implements OnInit {
   getAllLevel() {
     this.levelService.getAllLevel().subscribe((response: any) => {
       this.levelList = response.data;
+      // add to levelList an attribute called 'level' with value 'level' +code
+        this.levelList.forEach((level) => {
+            level.level = 'Level ' + level.code;
+        });
       this.tempData = this.levelList;
     });
   }
