@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { RouterModule, Routes, Router } from "@angular/router";
+import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
@@ -46,6 +47,7 @@ const routes: Routes = [
         NgbModule,
         CoreCommonModule,
         CoreDirectivesModule,
+        ContentHeaderModule
   ]
 })
 export class LevelModule { }
