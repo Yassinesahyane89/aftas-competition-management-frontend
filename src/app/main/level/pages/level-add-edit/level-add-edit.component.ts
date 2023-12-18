@@ -15,6 +15,7 @@ export class LevelAddEditComponent implements OnInit {
   public levelId: number;
   public point : number;
   public pageType: string;
+  public pageTitle: string;
 
   constructor(
         private levelListService: LevelService,
@@ -44,18 +45,27 @@ export class LevelAddEditComponent implements OnInit {
     checkPageType() {
       if (window.location.href.indexOf('add') > -1) {
         this.pageType = 'add';
+        this.pageTitle = 'Add New Level';
       } else {
         this.levelId = + (this.route.snapshot.paramMap.get('id'));
         this.getLevelById(this.levelId);
         this.pageType = 'edit';
+        this.pageTitle = 'Edit Level';
       }
+    }
+
+    // submit form
+    submit(form) {
+
     }
 
 
   ngOnInit(): void {
+    // check if page is add or edit
+    this.checkPageType();
     // content header
     this.contentHeader = {
-      headerTitle: this.pageType === 'add' ? 'Add New Level' : 'Edit Level',
+      headerTitle: this.pageTitle,
       actionButton: true,
       breadcrumb: {
         type: '',
@@ -71,7 +81,7 @@ export class LevelAddEditComponent implements OnInit {
             link: '/level/list'
           },
           {
-            name: this.pageType === 'add' ? 'Add New Level' : 'Edit Level',
+            name: this.pageTitle,
             isLink: false
           }
         ]
