@@ -19,15 +19,15 @@ export class FishAddEditComponent implements OnInit {
     public levelId : number;
     public levelOptions: { id: number, description: string }[] = [];
     public selectedLevelId: number= null;
+    public pageType: string;
+    public pageTitle: string;
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private fishService: FishService,
         private levelService: LevelService,
     ) { }
-
-    ngOnInit(): void {
-    }
 
     // get level list
     getLevelList() {
@@ -55,6 +55,55 @@ export class FishAddEditComponent implements OnInit {
             this.router.navigate([`/fish/list`]);
         }
         );
+    }
+
+    // check page type
+    checkPageType() {
+        if (window.location.href.indexOf('add') > -1) {
+            this.pageType = 'add';
+            this.pageTitle = 'Add New Level';
+        } else {
+            this.levelId = + (this.route.snapshot.paramMap.get('id'));
+            this.getFishById(this.levelId);
+            this.pageType = 'edit';
+            this.pageTitle = 'Edit Level';
+        }
+    }
+
+    submit(form) {
+
+    }
+    ngOnInit(): void {
+        // init level list
+        this.getLevelList();
+
+        // check page type
+        this.checkPageType();
+
+        // content header
+        this.contentHeader = {
+            headerTitle: this.pageTitle,
+            actionButton: true,
+            breadcrumb: {
+                type: '',
+                links: [
+                    {
+                        name: 'Home',
+                        isLink: true,
+                        link: '/'
+                    },
+                    {
+                        name: 'Fish',
+                        isLink: true,
+                        link: '/fish/list'
+                    },
+                    {
+                        name: this.pageTitle,
+                        isLink: false
+                    }
+                ]
+            }
+        };
     }
 
 }
