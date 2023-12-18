@@ -19,6 +19,7 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import { LevelListComponent } from './main/level/pages/level-list/level-list.component';
+import { LevelAddEditComponent } from './main/level/pages/level-add-edit/level-add-edit.component';
 
 const appRoutes: Routes = [
   {
@@ -37,7 +38,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, LevelListComponent],
+  declarations: [AppComponent, LevelListComponent, LevelAddEditComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
