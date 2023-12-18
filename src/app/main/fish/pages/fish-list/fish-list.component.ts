@@ -26,12 +26,21 @@ export class FishListComponent implements OnInit {
         private fishService: FishService,
     ) { }
 
+    // search method
     filterUpdate(event) {
         const val = event.target.value.toLowerCase();
         this.fishList = this.tempData.filter(function (d) {
             return d.description.toLowerCase().indexOf(val) !== -1 || !val;
         });
         this.table.offset = 0;
+    }
+
+    // get all fish method
+    getAllFish() {
+        this.fishService.getAllFish().subscribe((response: any) => {
+            this.fishList = response.data;
+            this.tempData = this.fishList;
+        });
     }
 
     ngOnInit(): void {
