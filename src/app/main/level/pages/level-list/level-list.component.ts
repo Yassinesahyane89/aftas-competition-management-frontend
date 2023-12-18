@@ -1,6 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 
+//services
+import {LevelService} from "../../service/level.service";
+
 @Component({
   selector: 'app-level-list',
   templateUrl: './level-list.component.html',
@@ -16,7 +19,9 @@ export class LevelListComponent implements OnInit {
 
   // Decorator
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  constructor() { }
+  constructor(
+      private levelService: LevelService,
+  ) { }
 
   filterUpdate(event) {
     const val = event.target.value.toLowerCase();
@@ -27,6 +32,10 @@ export class LevelListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.levelService.getAllLevel().subscribe((response: any) => {
+      this.levelList = response.data;
+      this.tempData = this.levelList;
+    });
   }
 
 }
