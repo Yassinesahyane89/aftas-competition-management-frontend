@@ -29,6 +29,10 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/level/level.module').then(m => m.LevelModule)
   },
   {
+    path: 'fish',
+    loadChildren: () => import('./main/fish/fish.module').then(m => m.FishModule)
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
