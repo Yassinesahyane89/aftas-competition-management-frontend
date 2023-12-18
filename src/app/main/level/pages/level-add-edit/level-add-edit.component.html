@@ -1,1 +1,70 @@
-<p>level-add-edit works!</p>
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+        <!-- Level Form -->
+        <section id="simple-validation" class="card mt-1">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="card-title m-2">{{pageTitle}}</h4>
+                    <div class="card-body">
+                        <form class="form-horizontal" (ngSubmit)="(levelForm.form.valid)" #levelForm="ngForm">
+                            <div class="row mb-1">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="basic-icon-default-description">Description</label>
+                                        <input
+                                                type="text"
+                                                class="form-control dt-description"
+                                                id="basic-icon-default-description"
+                                                placeholder="enter description"
+                                                name="description"
+                                                [(ngModel)]="description"
+                                                [class.error]="levelForm.submitted && DescriptionRef.invalid"
+                                                #DescriptionRef="ngModel"
+                                                required
+                                                aria-label="description"
+                                                aria-describedby="basic-icon-default-description2"
+                                        />
+                                        <span *ngIf="levelForm.submitted && DescriptionRef.invalid" class="invalid-form">
+                                                <small class="form-text text-danger">This field is required!</small>
+                                            </span>
+                                        <span *ngIf="levelForm.controls['description'].errors?.serverError" class="invalid-form">
+                                                <small class="form-text text-danger">{{ levelForm.controls['description'].errors.serverError }}</small>
+                                         </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="basic-icon-default-point">Point</label>
+                                        <input
+                                                type="number"
+                                                id="basic-icon-default-point"
+                                                class="form-control dt-point"
+                                                placeholder="enter point"
+                                                aria-label="point"
+                                                aria-describedby="basic-icon-default-point2"
+                                                name="point"
+                                                [(ngModel)]="point"
+                                                [class.error]="levelForm.submitted && PointRef.invalid"
+                                                #PointRef="ngModel"
+                                                required
+                                        />
+                                        <span *ngIf="levelForm.submitted && PointRef.invalid" class="invalid-form">
+                                              <small class="form-text text-danger" *ngIf="PointRef.errors.required">This field is required!</small>
+                                            </span>
+                                        <span *ngIf="levelForm.controls['point'].errors?.required" class="invalid-form">
+                                              <small class="form-text text-danger">{{ levelForm.controls['point'].errors.serverError }}</small>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-1" (click)="submit(levelForm)" rippleEffect>Submit</button>
+                            <button type="reset" class="btn btn-outline-secondary" rippleEffect><a routerLink='/level/list'>Cancel</a></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--/ Level Form -->
+    </div>
+</div>
