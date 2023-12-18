@@ -35,6 +35,11 @@ export class LevelAddEditComponent implements OnInit {
     return this.levelListService.updateLevel({id: this.levelId, description: this.description, point: this.point})
   }
 
+  // add level
+    addLevel() {
+        return this.levelListService.addLevel({description: this.description, point: this.point})
+    }
+
 
   ngOnInit(): void {
 
