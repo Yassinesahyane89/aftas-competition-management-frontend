@@ -39,6 +39,11 @@ export class FishListComponent implements OnInit {
     getAllFish() {
         this.fishService.getAllFish().subscribe((response: any) => {
             this.fishList = response.data;
+            // add to fishList.level an attribute called 'level' with value 'level' +code
+            this.fishList.forEach((fish) => {
+                fish.level.level = 'Level ' + fish.code;
+            });
+
             this.tempData = this.fishList;
         });
     }
