@@ -21,4 +21,9 @@ export class LevelService {
     getLevelById(id) {
         return this.http.get(environment.levelsUrl + '/' + id);
     }
+
+    // add level
+    addLevel(level) {
+        return this.http.post(environment.levelsUrl, level);
+    }
 }
