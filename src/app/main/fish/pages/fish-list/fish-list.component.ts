@@ -16,6 +16,7 @@ export class FishListComponent implements OnInit {
     public searchValue = '';
     public ColumnMode = ColumnMode;
     public fishList : any = [];
+    public tempData = [];
 
     // Decorator
     @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -24,6 +25,14 @@ export class FishListComponent implements OnInit {
         private router: Router,
         private fishService: FishService,
     ) { }
+
+    filterUpdate(event) {
+        const val = event.target.value.toLowerCase();
+        this.fishList = this.tempData.filter(function (d) {
+            return d.description.toLowerCase().indexOf(val) !== -1 || !val;
+        });
+        this.table.offset = 0;
+    }
 
     ngOnInit(): void {
     }
