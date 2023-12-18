@@ -4,6 +4,14 @@ export const locale = {
     MENU: {
       HOME: 'Home',
       SAMPLE: 'Sample'
+    },
+    APPS: {
+      LEVEL: {
+        COLLAPSIBLE: 'Level',
+        LIST: 'List',
+        EDIT: 'Edit',
+        ADD: 'Add'
+      },
+      }
     }
-  }
 }
