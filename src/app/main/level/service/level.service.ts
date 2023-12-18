@@ -12,7 +12,13 @@ export class LevelService {
     private http: HttpClient
   ) { }
 
+  //get all level
   getAllLevel() {
     return this.http.get(environment.levelsUrl);
   }
+
+  //get level by id
+    getLevelById(id) {
+        return this.http.get(environment.levelsUrl + '/' + id);
+    }
 }
