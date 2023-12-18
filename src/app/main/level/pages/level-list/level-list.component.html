@@ -64,7 +64,7 @@
                                     <span [data-feather]="'more-vertical'" [class]="'cursor-pointer'"></span>
                                 </button>
                                 <div ngbDropdownMenu>
-                                    <a  ngbDropdownItem>
+                                    <a (click)="EditLevel(row)"  ngbDropdownItem>
                                         <span [data-feather]="'edit'" [size]="16" [class]="'mr-50'"></span> Edit
                                     </a>
                                     <a href="javascript:;" ngbDropdownItem>

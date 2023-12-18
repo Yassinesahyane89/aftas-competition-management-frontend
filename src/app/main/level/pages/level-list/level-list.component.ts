@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
+import {Router} from "@angular/router";
 
 //services
 import {LevelService} from "../../service/level.service";
@@ -21,6 +22,7 @@ export class LevelListComponent implements OnInit {
   // Decorator
   @ViewChild(DatatableComponent) table: DatatableComponent;
   constructor(
+      private router: Router,
       private levelService: LevelService,
   ) { }
 
@@ -46,6 +48,11 @@ export class LevelListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllLevel();
+  }
+
+  EditLevel(row:any): void {
+    const levelId = row.id; // Assuming 'id' is the property that holds the level ID
+    this.router.navigate([`/level/edit/${levelId}`]);
   }
 
 }
