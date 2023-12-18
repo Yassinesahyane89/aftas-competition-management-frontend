@@ -31,4 +31,9 @@ export class LevelService {
     updateLevel(level) {
         return this.http.put(environment.levelsUrl + '/' + level.id, level);
     }
+
+    // delete level
+    deleteLevel(id) {
+        return this.http.delete(environment.levelsUrl + '/' + id);
+    }
 }
