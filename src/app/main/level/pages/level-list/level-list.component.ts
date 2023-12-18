@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 
 //services
@@ -7,7 +7,8 @@ import {LevelService} from "../../service/level.service";
 @Component({
   selector: 'app-level-list',
   templateUrl: './level-list.component.html',
-  styleUrls: ['./level-list.component.scss']
+  styleUrls: ['./level-list.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LevelListComponent implements OnInit {
 

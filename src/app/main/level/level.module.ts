@@ -3,8 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { RouterModule, Routes, Router } from "@angular/router";
 
-
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
+
+import { CoreCommonModule } from "@core/common.module";
+import { CoreDirectivesModule } from "@core/directives/directives";
 
 // level
 import { LevelListComponent } from "./pages/level-list/level-list.component";
@@ -40,6 +43,9 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         NgxDatatableModule,
         FormsModule,
+        NgbModule,
+        CoreCommonModule,
+        CoreDirectivesModule,
   ]
 })
 export class LevelModule { }
