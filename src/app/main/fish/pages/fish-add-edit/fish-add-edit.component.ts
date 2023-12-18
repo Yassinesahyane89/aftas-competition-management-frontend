@@ -42,4 +42,19 @@ export class FishAddEditComponent implements OnInit {
         );
     }
 
+    // get fish by id
+    getFishById(id) {
+        this.fishService.getFishById(id).
+        subscribe(
+            (response: any) => {
+            this.name = response.data.name;
+            this.weight = response.data.weight;
+            this.selectedLevelId = response.data.level.id;
+        },
+        (error) => {
+            this.router.navigate([`/fish/list`]);
+        }
+        );
+    }
+
 }
