@@ -6,6 +6,7 @@ import { ContentHeaderModule } from 'app/layout/components/content-header/conten
 
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgSelectModule } from '@ng-select/ng-select';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 
@@ -49,7 +50,8 @@ const routes: Routes = [
     CoreCommonModule,
     CoreDirectivesModule,
     ContentHeaderModule,
-    ToastrModule
+    ToastrModule,
+    NgSelectModule,
   ]
 })
 export class FishModule { }

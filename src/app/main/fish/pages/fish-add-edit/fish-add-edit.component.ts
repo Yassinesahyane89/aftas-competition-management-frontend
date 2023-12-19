@@ -15,7 +15,7 @@ import {LevelService} from "../../../level/service/level.service";
 export class FishAddEditComponent implements OnInit {
     public contentHeader: object;
     public name = "";
-    public weight : number;
+    public averageWeight : number;
     public levelId : number;
     public levelList: any = [];
     public levelOptions: {
@@ -52,7 +52,7 @@ export class FishAddEditComponent implements OnInit {
         subscribe(
             (response: any) => {
             this.name = response.data.name;
-            this.weight = response.data.weight;
+            this.averageWeight = response.data.averageWeight;
             this.selectedLevelId = response.data.level.id;
         },
         (error) => {
@@ -108,6 +108,10 @@ export class FishAddEditComponent implements OnInit {
                 ]
             }
         };
+    }
+
+    AddNewLevel() {
+        this.router.navigate(['/level/add']);
     }
 
 }

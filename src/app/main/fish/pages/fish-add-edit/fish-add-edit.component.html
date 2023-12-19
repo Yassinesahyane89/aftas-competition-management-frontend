@@ -36,25 +36,25 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="form-label" for="basic-icon-default-weight">Weight</label>
+                                        <label class="form-label" for="basic-icon-default-averageWeight">AverageWeight</label>
                                         <input
                                                 type="number"
-                                                id="basic-icon-default-weight"
-                                                class="form-control dt-weight"
-                                                placeholder="enter weight"
-                                                aria-label="weight"
-                                                aria-describedby="basic-icon-default-weight2"
-                                                name="weight"
-                                                [(ngModel)]="weight"
-                                                [class.error]="fishForm.submitted && WeightRef.invalid"
-                                                #WeightRef="ngModel"
+                                                id="basic-icon-default-averageWeight"
+                                                class="form-control dt-averageWeight"
+                                                placeholder="enter averageWeight"
+                                                aria-label="averageWeight"
+                                                aria-describedby="basic-icon-default-averageWeight2"
+                                                name="averageWeight"
+                                                [(ngModel)]="averageWeight"
+                                                [class.error]="fishForm.submitted && AverageWeightRef.invalid"
+                                                #AverageWeightRef="ngModel"
                                                 required
                                         />
-                                        <span *ngIf="fishForm.submitted && WeightRef.invalid" class="invalid-form">
-                                              <small class="form-text text-danger" *ngIf="WeightRef.errors.required">This field is required!</small>
+                                        <span *ngIf="fishForm.submitted && AverageWeightRef.invalid" class="invalid-form">
+                                              <small class="form-text text-danger" *ngIf="AverageWeightRef.errors.required">This field is required!</small>
                                             </span>
-                                        <span *ngIf="fishForm.controls['weight'].errors?.serverError" class="invalid-form">
-                                              <small class="form-text text-danger">{{ fishForm.controls['weight'].errors.serverError }}</small>
+                                        <span *ngIf="fishForm.controls['averageWeight'].errors?.serverError" class="invalid-form">
+                                              <small class="form-text text-danger">{{ fishForm.controls['averageWeight'].errors.serverError }}</small>
                                         </span>
                                     </div>
                                 </div>
@@ -66,6 +66,24 @@
                                         </select>
                                     </div>
                                 </div>
+<!--                                <div class="col-sm-6">-->
+<!--                                    <label>Level</label>-->
+<!--                                    <div class="invoice-customer">-->
+<!--                                        <ng-select [items]="levelOptions" bindLabel="client.company" bindValue="client" [(ngModel)]="selectedLevelId" name="levelId" #select>-->
+<!--                                            <ng-template ng-header-tmp>-->
+<!--                                                <button-->
+<!--                                                        class="add-new-customer btn btn-flat-success cursor-pointer rounded-0 text-left p-50 w-100"-->
+<!--                                                        (click)="AddNewLevel()">-->
+<!--                                                    <i data-feather="plus"></i>-->
+<!--                                                    <span class="align-middle ml-25">Add New Level</span>-->
+<!--                                                </button>-->
+<!--                                            </ng-template>-->
+<!--                                            <ng-template ng-option-tmp let-item="item">-->
+<!--                                                {{ item.description}}-->
+<!--                                            </ng-template>-->
+<!--                                        </ng-select>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                             </div>
                             <button type="submit" class="btn btn-primary mr-1" (click)="submit(fishForm)" rippleEffect>Submit</button>
                             <button type="reset" class="btn btn-outline-secondary" rippleEffect><a routerLink='/fish/list'>Cancel</a></button>
