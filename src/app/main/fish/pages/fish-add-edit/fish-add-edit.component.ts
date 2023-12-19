@@ -106,6 +106,32 @@ export class FishAddEditComponent implements OnInit {
         this.selectedLevelId = null;
     }
 
+    // handle error case
+    handleError(error,form) {
+        if (error.error && error.error.message) {
+            console.log(error.error.message);
+            console.log(",jdfsj");
+            const customToastrRef = cloneDeep(this.options);
+            customToastrRef.toastComponent = CustomToastrComponent;
+            customToastrRef.closeButton = true;
+            customToastrRef.tapToDismiss = false;
+            customToastrRef.progressBar = true;
+            customToastrRef.toastClass = 'toast ngx-toastr';
+            this.toastr.error(error.error.message, 'Error!', customToastrRef);
+
+        } else if (error && error.error) {
+            const validationErrors = error.error;
+
+            Object.keys(validationErrors).forEach((key) => {
+                const control = form.controls[key];
+                if (control) {
+                    control.setErrors({serverError: validationErrors[key].join(', ')});
+                }
+                console.log(form.controls['point'])
+            });
+        }
+    }
+
     submit(form) {
 
     }
