@@ -157,7 +157,13 @@ export class FishAddEditComponent implements OnInit {
     }
 
     submit(form) {
-
+        if (form.valid) {
+            if (this.pageType === 'add') {
+                this.addNewFish(form);
+            } else {
+                this.updateFish(form);
+            }
+        }
     }
     ngOnInit(): void {
         // init level list
