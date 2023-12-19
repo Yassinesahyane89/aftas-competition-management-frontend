@@ -34,6 +34,10 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/fish/fish.module').then(m => m.FishModule)
   },
   {
+    path: 'competition',
+    loadChildren: () => import('./main/competition/competition.module').then(m => m.CompetitionModule)
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
