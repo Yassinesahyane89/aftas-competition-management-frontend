@@ -62,7 +62,16 @@ const routes: Routes = [
     CompetitionAddEditComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes),
+    NgxDatatableModule,
+    FormsModule,
+    NgbModule,
+    CoreCommonModule,
+    CoreDirectivesModule,
+    ContentHeaderModule,
+    ToastrModule,
+    NgSelectModule,
   ]
 })
 export class CompetitionModule { }
