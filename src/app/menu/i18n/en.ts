@@ -5,6 +5,12 @@ export const locale = {
       HOME: 'Home',
       SAMPLE: 'Sample',
       APPS: {
+        COMPETITION: {
+          COLLAPSIBLE: 'Competition',
+          LIST: 'List',
+          EDIT: 'Edit',
+          ADD: 'Add'
+        },
         LEVEL: {
           COLLAPSIBLE: 'Level',
           LIST: 'List',
