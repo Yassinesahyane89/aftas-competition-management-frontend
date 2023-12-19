@@ -4,11 +4,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 // services
 import {FishService} from "../../service/fish.service";
 import {LevelService} from "../../../level/service/level.service";
-import {CustomToastrComponent} from "../../../../../@core/components/custom-toastr/custom-toastr.component";
 
 // lodash
 import { cloneDeep } from 'lodash';
 import { ToastrService, GlobalConfig } from 'ngx-toastr';
+import { CustomToastrComponent } from '@core/components/custom-toastr/custom-toastr.component';
 
 @Component({
   selector: 'app-fish-add-edit',
@@ -41,7 +41,9 @@ export class FishAddEditComponent implements OnInit {
         private router: Router,
         private fishService: FishService,
         private levelService: LevelService,
-    ) { }
+    ) {
+        this.options = this.toastr.toastrConfig;
+    }
 
     // get level list
     getLevelList() {
