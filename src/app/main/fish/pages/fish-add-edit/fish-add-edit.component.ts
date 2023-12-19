@@ -4,6 +4,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 // services
 import {FishService} from "../../service/fish.service";
 import {LevelService} from "../../../level/service/level.service";
+import {CustomToastrComponent} from "../../../../../@core/components/custom-toastr/custom-toastr.component";
+
+// lodash
+import { cloneDeep } from 'lodash';
+import { ToastrService, GlobalConfig } from 'ngx-toastr';
 
 @Component({
   selector: 'app-fish-add-edit',
@@ -26,8 +31,12 @@ export class FishAddEditComponent implements OnInit {
     public selectedLevelId: number= null;
     public pageType: string;
     public pageTitle: string;
+    private toastRef: any;
+    private options: GlobalConfig;
+
 
     constructor(
+        private toastr: ToastrService,
         private route: ActivatedRoute,
         private router: Router,
         private fishService: FishService,
@@ -72,6 +81,29 @@ export class FishAddEditComponent implements OnInit {
             this.pageType = 'edit';
             this.pageTitle = 'Edit Level';
         }
+    }
+
+    // handle success case
+    handleSuccess(response,form) {
+
+        // redirect to list page /level/list
+        this.router.navigate(['/fish/list']).then(r => console.log(r));
+
+        // Handle success case
+        const customToastrRef = cloneDeep(this.options);
+        customToastrRef.toastComponent = CustomToastrComponent;
+        customToastrRef.closeButton = true;
+        customToastrRef.tapToDismiss = false;
+        customToastrRef.progressBar = true;
+        customToastrRef.toastClass = 'toast ngx-toastr';
+        this.toastr.success(response.message, 'Success!', customToastrRef);
+
+        // reset form
+        form.reset();
+        this.name = '';
+        this.averageWeight = null;
+        this.levelId = null;
+        this.selectedLevelId = null;
     }
 
     submit(form) {
