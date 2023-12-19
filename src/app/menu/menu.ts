@@ -23,7 +23,7 @@ export const menu: CoreMenu[] = [
         title: 'Competition',
         translate: 'MENU.APPS.COMPETITION.COLLAPSIBLE',
         type: 'collapsible',
-        icon: 'bar-chart-2',
+        icon: 'anchor',
         children: [
             {
                 id: 'list',
@@ -49,7 +49,7 @@ export const menu: CoreMenu[] = [
         title: 'Fish',
         translate: 'MENU.APPS.FISH.COLLAPSIBLE',
         type: 'collapsible',
-        icon: 'bar-chart-2',
+        icon: 'codesandbox',
         children: [
         {
             id: 'list',
