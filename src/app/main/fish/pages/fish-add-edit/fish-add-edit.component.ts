@@ -144,6 +144,18 @@ export class FishAddEditComponent implements OnInit {
         )
     }
 
+    // update fish
+    updateFish(form) {
+        this.fishService.updateFish({ id: this.levelId, name: this.name, averageWeight: this.averageWeight, levelId: this.selectedLevelId }).
+        subscribe(
+            (response: any) => {
+                this.handleSuccess(response,form);
+            },(error) => {
+                this.handleError(error,form);
+            }
+        )
+    }
+
     submit(form) {
 
     }
