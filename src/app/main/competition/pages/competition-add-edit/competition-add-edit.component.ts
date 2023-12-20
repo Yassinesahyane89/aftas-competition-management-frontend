@@ -167,6 +167,17 @@ export class CompetitionAddEditComponent implements OnInit {
             });
     }
 
+    // git commit -m "add submit method for submitting form"
+    submit(form) {
+        if (form.valid) {
+            if (this.pageType === 'add') {
+                this.addNewCompetition(form);
+            } else {
+                this.updateCompetition(form);
+            }
+        }
+    }
+
 
     ngOnInit(): void {
   }
