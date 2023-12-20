@@ -34,6 +34,8 @@ export class CompetitionAddEditComponent implements OnInit {
   public fileName = undefined;
   public featuredImage: string;
   isCompetitionCreated: boolean = false;
+  public pageType: string;
+  public pageTitle: string;
   constructor(
       private router: Router,
       private competitionService: CompetitionService,
@@ -73,6 +75,18 @@ export class CompetitionAddEditComponent implements OnInit {
     formatDate(date: NgbDateStruct) {
         return new Date(date.year, date.month - 1, date.day).toISOString().split('T')[0];
     }
+
+    // git commit -m "add checkPageType method for checking page type"
+    checkPageType() {
+        if (window.location.href.indexOf('add') > -1) {
+            this.pageType = 'add';
+            this.pageTitle = 'Add New Competition';
+        } else {
+            this.pageType = 'edit';
+            this.pageTitle = 'Edit Competition';
+        }
+    }
+
 
     ngOnInit(): void {
   }
