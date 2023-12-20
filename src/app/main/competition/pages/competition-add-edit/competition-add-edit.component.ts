@@ -113,6 +113,31 @@ export class CompetitionAddEditComponent implements OnInit {
         this.toastr.success(response.message, 'Success!', customToastrRef);
     }
 
+    //git commit -m "add handleError method for handling error case"
+    handleError(error,form) {
+        if (error.error && error.error.message) {
+            const customToastrRef = cloneDeep(this.options);
+            customToastrRef.toastComponent = CustomToastrComponent;
+            customToastrRef.closeButton = true;
+            customToastrRef.tapToDismiss = false;
+            customToastrRef.progressBar = true;
+            customToastrRef.toastClass = 'toast ngx-toastr';
+            this.toastr.error(error.error.message, 'Error!', customToastrRef);
+        }else if (error && error.error){
+            const validationErrors = error.error;
+
+            Object.keys(validationErrors).forEach(prop => {
+                const formControl = form.controls[prop];
+                if (formControl) {
+                    // activate the error message
+                    formControl.setErrors({
+                        serverError: validationErrors[prop][0]
+                    });
+                }
+            });
+        }
+    }
+
 
     ngOnInit(): void {
   }
