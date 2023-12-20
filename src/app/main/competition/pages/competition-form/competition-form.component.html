@@ -1,1 +1,182 @@
-<p>competition-form works!</p>
+<form action="javascript:;" class="mt-2" (ngSubmit)="(competitionsForm.form.valid)" #competitionsForm="ngForm">
+    <div class="row">
+        <div class="col-12 mb-2">
+            <div class="border rounded p-2">
+                <h4 class="mb-1">Competition Image</h4>
+                <div class="media flex-column flex-md-row">
+                    <img
+                            [src]="featuredImage"
+                            id="fishing competition"
+                            class="rounded mr-2 mb-1 mb-md-0"
+                            width="170"
+                            height="110"
+                            alt="fishing competition"
+                    />
+                    <div class="media-body">
+                        <small class="text-muted">Required image resolution 800x400, image size 10mb.</small>
+                        <p class="my-50">
+                            <a href="javascript:void(0);" id="blog-image-text">C:\fakepath\{{ fileName === undefined ? 'fishing-competition.jpg' : fileName }}</a>
+                        </p>
+                        <div class="d-inline-block">
+                            <div class="form-group mb-0">
+                                <div class="custom-file">
+                                    <input
+                                            type="file"
+                                            class="custom-file-input"
+                                            id="blogCustomFile"
+                                            accept="image/*"
+                                            (change)="uploadImage($event)"
+                                    />
+                                    <label class="custom-file-label" for="blogCustomFile">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="form-group mb-2">
+                <label for="competition-amount">Amount</label>
+                <input
+                        type="number"
+                        id="competition-amount"
+                        name="competition-amount"
+                        class="form-control"
+                        [(ngModel)]="competition.amount"
+                        [class.error]="competitionsForm.submitted && AmountRef.invalid"
+                        #AmountRef="ngModel"
+                        required
+                />
+                <span *ngIf="competitionsForm.submitted && AmountRef.invalid" class="invalid-form">
+                                                    <small class="form-text text-danger">This field is required!</small>
+                                                </span>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="form-group mb-2">
+                <label for="competition-numberOfParticipants">number of participants</label>
+                <input
+                        type="number"
+                        id="competition-numberOfParticipants"
+                        name="competition-numberOfParticipants"
+                        class="form-control"
+                        [(ngModel)]="competition.numberOfParticipants"
+                        [class.error]="competitionsForm.submitted && NumberOfParticipantsRef.invalid"
+                        #NumberOfParticipantsRef="ngModel"
+                        required
+                />
+                <span *ngIf="competitionsForm.submitted && NumberOfParticipantsRef.invalid" class="invalid-form">
+                                                    <small class="form-text text-danger">This field is required!</small>
+                                                </span>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="form-group mb-2">
+                <label for="competition-date">competition date</label>
+                <div class="input-group">
+                    <input
+                            class="form-control"
+                            placeholder="yyyy-mm-dd"
+                            id="competition-date"
+                            name="competition-date"
+                            [(ngModel)]="competition.date"
+                            ngbDatepicker
+                            [dayTemplate]="customDay"
+                            [markDisabled]="isDisabled"
+                            #CustomDayDP="ngbDatepicker"
+                            [class.error]="competitionsForm.submitted && DateRef.invalid"
+                            #DateRef="ngModel"
+                            required
+                    />
+                    <div class="input-group-append">
+                        <button
+                                class="btn btn-outline-secondary feather icon-calendar"
+                                (click)="CustomDayDP.toggle()"
+                                type="button"
+                                rippleEffect
+                        ></button>
+                    </div>
+                </div>
+                <ng-template
+                    #customDay
+                    let-date
+                    let-currentMonth="currentMonth"
+                    let-selected="selected"
+                    let-disabled="disabled"
+                    let-focused="focused"
+                >
+                                                <span
+                                                        class="custom-day"
+                                                        [class.weekend]="isWeekend(date)"
+                                                        [class.focused]="focused"
+                                                        [class.bg-primary]="selected"
+                                                        [class.hidden]="date.month !== currentMonth"
+                                                        [class.text-muted]="disabled"
+                                                >
+                                                  {{ date.day }}
+                                                </span>
+                </ng-template>
+                <span *ngIf="competitionsForm.submitted && DateRef.invalid" class="invalid-form">
+                                                    <small class="form-text text-danger">This field is required!</small>
+                                                </span>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="form-group mb-2">
+                <label for="competition-location">Location</label>
+                <input
+                        type="text"
+                        id="competition-location"
+                        name="competition-location"
+                        class="form-control"
+                        [(ngModel)]="competition.location"
+                        [class.error]="competitionsForm.submitted && LocationRef.invalid"
+                        #LocationRef="ngModel"
+                        required
+                />
+                <span *ngIf="competitionsForm.submitted && LocationRef.invalid" class="invalid-form">
+                                                    <small class="form-text text-danger">This field is required!</small>
+                                                </span>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="form-group mb-2">
+                <label>Start time</label>
+                <ng2-flatpickr
+                        [config]="timeOptions"
+                        name="startTime"
+                        [setDate]="competition.startTime"
+                        [(ngModel)]="competition.startTime"
+                        [class.error]="competitionsForm.submitted && StartTimeRef.invalid"
+                        #StartTimeRef="ngModel"
+                        required
+                ></ng2-flatpickr>
+                <span *ngIf="competitionsForm.submitted && StartTimeRef.invalid" class="invalid-form">
+                                                    <small class="form-text text-danger">This field is required!</small>
+                                                </span>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="form-group mb-2">
+                <label>End time</label>
+                <ng2-flatpickr
+                        [config]="timeOptions"
+                        [setDate]="competition.endTime"
+                        name="endTime"
+                        [(ngModel)]="competition.endTime"
+                        [class.error]="competitionsForm.submitted && EndTimeRef.invalid"
+                        #EndTimeRef="ngModel"
+                        required
+                ></ng2-flatpickr>
+                <span *ngIf="competitionsForm.submitted && EndTimeRef.invalid" class="invalid-form">
+                                                    <small class="form-text text-danger">This field is required!</small>
+                                                </span>
+            </div>
+        </div>
+        <div class="col-12 mt-50">
+            <button type="submit" class="btn btn-primary mr-1" (click)="submit(competitionsForm)" rippleEffect>Submit</button>
+            <button type="reset" class="btn btn-outline-secondary" rippleEffect routerLink="/competitions2/list">Cancel</button>
+        </div>
+    </div>
+</form>
