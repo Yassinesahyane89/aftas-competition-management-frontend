@@ -1,11 +1,16 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import { NgbDateStruct, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from "@angular/router";
+import { NgbDateStruct, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 
 
 // services
 import { CompetitionService } from "../../service/competition.service";
+
+// lodash
+import { cloneDeep } from 'lodash';
+import { ToastrService, GlobalConfig } from 'ngx-toastr';
+import { CustomToastrComponent } from '@core/components/custom-toastr/custom-toastr.component';
 
 @Component({
   selector: 'app-competition-add-edit',
@@ -36,12 +41,18 @@ export class CompetitionAddEditComponent implements OnInit {
   isCompetitionCreated: boolean = false;
   public pageType: string;
   public pageTitle: string;
+  private toastRef: any;
+  private options: GlobalConfig;
+
   constructor(
+      private toastr: ToastrService,
       private router: Router,
       private competitionService: CompetitionService,
       private calendar: NgbCalendar,
       private formatter: NgbDateParserFormatter
-  ) { }
+  ) {
+      this.options = this.toastr.toastrConfig;
+  }
 
   // git commit -m "add isDisabled and isWeekend methods"
   isDisabled = (date: NgbDate, current: { month: number; year: number }) => date.month !== current.month;
@@ -87,7 +98,20 @@ export class CompetitionAddEditComponent implements OnInit {
         }
     }
 
-    //
+    //git commit -m "add handleSuccess method for handling success case"
+    handleSuccess(response,form) {
+        // change button state
+        this.isCompetitionCreated = true;
+
+        // Handle success case
+        const customToastrRef = cloneDeep(this.options);
+        customToastrRef.toastComponent = CustomToastrComponent;
+        customToastrRef.closeButton = true;
+        customToastrRef.tapToDismiss = false;
+        customToastrRef.progressBar = true;
+        customToastrRef.toastClass = 'toast ngx-toastr';
+        this.toastr.success(response.message, 'Success!', customToastrRef);
+    }
 
 
     ngOnInit(): void {
