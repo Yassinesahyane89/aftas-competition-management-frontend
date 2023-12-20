@@ -31,4 +31,9 @@ export class CompetitionService {
     updateCompetition(competition) {
         return this.http.put(environment.competitionsUrl + '/' + competition.id, competition);
     }
+
+    // delete competition
+    deleteCompetition(id) {
+        return this.http.delete(environment.competitionsUrl + '/' + id);
+    }
 }
