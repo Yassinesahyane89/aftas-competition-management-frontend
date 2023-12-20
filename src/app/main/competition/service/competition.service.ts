@@ -21,4 +21,9 @@ export class CompetitionService {
     getCompetitionById(id) {
         return this.http.get(environment.competitionsUrl + '/' + id);
     }
+
+    // add competition
+    addCompetition(competition) {
+        return this.http.post(environment.competitionsUrl, competition);
+    }
 }
