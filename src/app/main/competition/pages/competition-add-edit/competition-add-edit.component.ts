@@ -96,6 +96,16 @@ export class CompetitionAddEditComponent implements OnInit {
       .split("T")[0];
   }
 
+  // format date from string to NgbDateStruct
+  formatDateFromString(date: string) {
+    const dateArray = date.split("-");
+    return {
+      year: parseInt(dateArray[0]),
+      month: parseInt(dateArray[1]),
+      day: parseInt(dateArray[2]),
+    };
+  }
+
   //
 
   //add handleSuccess method for handling success case
@@ -190,22 +200,23 @@ export class CompetitionAddEditComponent implements OnInit {
       this.pageType = "add";
       this.pageTitle = "Add New Competition";
     } else {
-      this.code = this.route.snapshot.paramMap.get("code");
+      this.code = this.route.snapshot.paramMap.get("id");
       this.getCompetitionById(this.code);
+      this.isCompetitionCreated = true; 
       this.pageType = "edit";
       this.pageTitle = "Edit Competition";
     }
   }
 
   // add getCompetitionById method for getting competition by id
-  getCompetitionById(id) {
+  getCompetitionById(code) {
     this.competitionService
-      .getCompetitionById(id)
+      .getCompetitionById(code)
       .subscribe((response: any) => {
         this.code = response.data.code;
         this.amount = response.data.amount;
         this.numberOfParticipants = response.data.numberOfParticipants;
-        this.date = response.data.date;
+        this.date = this.formatDateFromString(response.data.date);
         this.startTime = response.data.startTime;
         this.endTime = response.data.endTime;
         this.location = response.data.location;
