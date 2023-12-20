@@ -138,6 +138,17 @@ export class CompetitionAddEditComponent implements OnInit {
         }
     }
 
+    // git commit -m "add methode addNewCompetition for adding new competition"
+    addNewCompetition(form) {
+        this.competitionService.addCompetition({ amount: this.competitionAmount, date: this.formatDate(this.competitionDate), startTime: this.formatTime(this.startTime), endTime: this.formatTime(this.endTime), location: this.competitionLocation, numberOfParticipants: this.competitionNumberOfParticipants })
+            .subscribe((response :any) => {
+                this.handleSuccess(response,form);
+                this.competitionId = response.data.id;
+            }, (error) => {
+                this.handleError(error,form);
+            });
+    }
+
 
     ngOnInit(): void {
   }
