@@ -41,6 +41,10 @@ export class CompetitionAddEditComponent implements OnInit {
       private formatter: NgbDateParserFormatter
   ) { }
 
+  // git commit -m "add isDisabled and isWeekend methods"
+  isDisabled = (date: NgbDate, current: { month: number; year: number }) => date.month !== current.month;
+  isWeekend = (date: NgbDate) => this.calendar.getWeekday(date) >= 6;
+
   ngOnInit(): void {
   }
 
