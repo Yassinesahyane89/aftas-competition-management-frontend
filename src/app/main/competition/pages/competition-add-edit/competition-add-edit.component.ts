@@ -193,7 +193,35 @@ export class CompetitionAddEditComponent implements OnInit {
             this.competitionNumberOfParticipants = response.data.numberOfParticipants;
         });
     }
+    // git commit -m "add ngOnInit method"
     ngOnInit(): void {
+        // check page type
+        this.checkPageType();
+
+        // content header
+        this.contentHeader = {
+            headerTitle: this.pageTitle,
+            actionButton: true,
+            breadcrumb: {
+                type: '',
+                links: [
+                    {
+                        name: 'Home',
+                        isLink: true,
+                        link: '/'
+                    },
+                    {
+                        name: 'Competition',
+                        isLink: true,
+                        link: '/competition/list'
+                    },
+                    {
+                        name: this.pageTitle,
+                        isLink: false,
+                    }
+                ]
+            }
+        };
   }
 
 }
