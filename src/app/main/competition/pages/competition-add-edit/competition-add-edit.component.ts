@@ -157,15 +157,10 @@ export class CompetitionAddEditComponent implements OnInit {
 
     // git commit -m "add methode updateCompetition for updating competition"
     updateCompetition(form) {
-        this.competitionService.updateCompetition({
-            code: this.competitionCode,
-            amount: this.competitionAmount,
-            date: this.formatDate(this.competitionDate),
-            startTime: this.formatTime(this.startTime),
-            endTime: this.formatTime(this.endTime),
-            location: this.competitionLocation,
-            numberOfParticipants: this.competitionNumberOfParticipants
-        })
+        this.competition.startTime = this.formatTime(this.competition.startTime);
+        this.competition.endTime = this.formatTime(this.competition.endTime);
+        this.competition.date = this.formatDate(this.competition.date);
+        this.competitionService.updateCompetition(this.competition)
             .subscribe((response :any) => {
                 this.handleSuccess(response,form);
             }, (error) => {
@@ -188,13 +183,7 @@ export class CompetitionAddEditComponent implements OnInit {
     // git commit -m "add getCompetitionById method for getting competition by id"
     getCompetitionById(id) {
         this.competitionService.getCompetitionById(id).subscribe((response: any) => {
-            this.competitionCode = response.data.code;
-            this.competitionAmount = response.data.amount;
-            this.competitionDate = this.formatter.parse(response.data.date);
-            this.startTime = response.data.startTime;
-            this.endTime = response.data.endTime;
-            this.competitionLocation = response.data.location;
-            this.competitionNumberOfParticipants = response.data.numberOfParticipants;
+            this.competition = response.data;
         });
     }
     // git commit -m "add ngOnInit method"
