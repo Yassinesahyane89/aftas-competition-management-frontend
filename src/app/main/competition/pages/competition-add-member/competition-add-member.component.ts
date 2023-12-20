@@ -77,7 +77,7 @@ export class CompetitionAddMemberComponent implements OnInit {
   }
 
   // handle success case
-  handleSuccess(response, form) {
+  handleSuccess(response) {
     // redirect to list page /level/list
     this.router.navigate(["/fish/list"]).then((r) => console.log(r));
 
@@ -89,13 +89,10 @@ export class CompetitionAddMemberComponent implements OnInit {
     customToastrRef.progressBar = true;
     customToastrRef.toastClass = "toast ngx-toastr";
     this.toastr.success(response.message, "Success!", customToastrRef);
-
-    // reset form
-    form.reset();
   }
 
   // handle error case
-  handleError(error, form) {
+  handleError(error) {
     if (error.error && error.error.message) {
       const customToastrRef = cloneDeep(this.options);
       customToastrRef.toastComponent = CustomToastrComponent;
@@ -104,16 +101,6 @@ export class CompetitionAddMemberComponent implements OnInit {
       customToastrRef.progressBar = true;
       customToastrRef.toastClass = "toast ngx-toastr";
       this.toastr.error(error.error.message, "Error!", customToastrRef);
-    } else if (error && error.error) {
-      const validationErrors = error.error;
-
-      Object.keys(validationErrors).forEach((key) => {
-        const control = form.controls[key];
-        if (control) {
-          control.setErrors({ serverError: validationErrors[key].join(", ") });
-        }
-        console.log(form.controls["point"]);
-      });
     }
   }
 
@@ -128,7 +115,7 @@ export class CompetitionAddMemberComponent implements OnInit {
   }
 
   // add new member
-  addNewMember(form) {
+  addNewMember() {
     this.competitionService
       .registerMemberToCompetition({
         competitionCode: this.competitionCode,
@@ -136,17 +123,17 @@ export class CompetitionAddMemberComponent implements OnInit {
       })
       .subscribe(
         (response: any) => {
-          this.handleSuccess(response, form);
+          this.handleSuccess(response);
         },
         (error) => {
-          this.handleError(error, form);
+          this.handleError(error);
         }
       );
   }
 
   // submit form
-  submit(form) {
-    this.addNewMember(form);
+  submit() {
+    this.addNewMember();
   }
 
   ngOnInit(): void {
