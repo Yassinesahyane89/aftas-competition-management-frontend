@@ -20,7 +20,6 @@ import { CustomToastrComponent } from '@core/components/custom-toastr/custom-toa
 export class CompetitionAddEditComponent implements OnInit {
   public contentHeader: object;
   public featuredImage: string;
-  public isCompetitionCreated: boolean = false;
   public pageType: string;
   public pageTitle: string;
   public timeOptions: FlatpickrOptions = {
@@ -31,15 +30,14 @@ export class CompetitionAddEditComponent implements OnInit {
   public fileName = undefined;
   private options: GlobalConfig;
 
-  public competition: any = {
-    code: "",
-    amount: "",
-    date: "",
-    startTime: "",
-    endTime: "",
-    location: "",
-    numberOfParticipants: "",
-  };
+  public code: string;
+  public amount: number;
+  public numberOfParticipants: number;
+  public date: NgbDateStruct;
+  public startTime;
+  public endTime;
+  public location: string;
+  public isCompetitionCreated: boolean = false;
 
   constructor(
     private toastr: ToastrService,
@@ -142,25 +140,30 @@ export class CompetitionAddEditComponent implements OnInit {
 
   // git commit -m "add methode addNewCompetition for adding new competition"
   addNewCompetition(form) {
-    let newCompetition: any = this.competition;
-    newCompetition.startTime = this.formatTime(this.competition.startTime);
-    newCompetition.endTime = this.formatTime(this.competition.endTime);
-    newCompetition.date = this.formatDate(this.competition.date);
-    this.competitionService.addCompetition(newCompetition).subscribe(
-      (response: any) => {
-        this.handleSuccess(response, form);
-        this.competition.code = response.data.code;
-      },
-      (error) => {
-        this.handleError(error, form);
-      }
-    );
+    this.competitionService
+      .addCompetition({
+        amount: this.amount,
+        numberOfParticipants: this.numberOfParticipants,
+        date: this.formatDate(this.date),
+        startTime: this.formatTime(this.startTime),
+        endTime: this.formatTime(this.endTime),
+        location: this.location,
+      })
+      .subscribe(
+        (response: any) => {
+          this.handleSuccess(response, form);
+          this.code = response.data.code;
+        },
+        (error) => {
+          this.handleError(error, form);
+        }
+      );
   }
 
   // git commit -m "add methode updateCompetition for updating competition"
   updateCompetition(form) {
     // create new
-    this.competitionService.updateCompetition(this.competition).subscribe(
+    this.competitionService.updateCompetition({code:this.code,amount: this.amount, numberOfParticipants: this.numberOfParticipants, date: this.formatDate(this.date), startTime: this.formatTime(this.startTime), endTime: this.formatTime(this.endTime), location: this.location}).subscribe(
       (response: any) => {
         this.handleSuccess(response, form);
       },
@@ -173,7 +176,7 @@ export class CompetitionAddEditComponent implements OnInit {
   // git commit -m "add submit method for submitting form"
   submit(form) {
     if (form.valid) {
-      if (this.pageType === "add") {
+      if (this.pageType === "add" && this.code == undefined) {
         this.addNewCompetition(form);
       } else {
         this.updateCompetition(form);
@@ -187,8 +190,8 @@ export class CompetitionAddEditComponent implements OnInit {
       this.pageType = "add";
       this.pageTitle = "Add New Competition";
     } else {
-      this.competition.code = this.route.snapshot.paramMap.get("code");
-      this.getCompetitionById(this.competition.code);
+      this.code = this.route.snapshot.paramMap.get("code");
+      this.getCompetitionById(this.code);
       this.pageType = "edit";
       this.pageTitle = "Edit Competition";
     }
@@ -199,7 +202,13 @@ export class CompetitionAddEditComponent implements OnInit {
     this.competitionService
       .getCompetitionById(id)
       .subscribe((response: any) => {
-        this.competition = response.data;
+        this.code = response.data.code;
+        this.amount = response.data.amount;
+        this.numberOfParticipants = response.data.numberOfParticipants;
+        this.date = response.data.date;
+        this.startTime = response.data.startTime;
+        this.endTime = response.data.endTime;
+        this.location = response.data.location;
       });
   }
 
