@@ -36,4 +36,11 @@ export class CompetitionService {
     deleteCompetition(id) {
         return this.http.delete(environment.competitionsUrl + '/' + id);
     }
+
+    //register member to competition
+    registerMemberToCompetition(ranking) {
+        return this.http.post(
+          environment.competitionsUrl + "/register-member",
+          ranking
+        );}
 }
