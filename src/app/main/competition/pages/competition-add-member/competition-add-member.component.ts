@@ -14,6 +14,7 @@ import {
   SelectionType,
 } from "@swimlane/ngx-datatable";
 import { CompetitionService } from "../../service/competition.service";
+import { MemberService } from "app/main/member/service/member.service";
 
 @Component({
   selector: "app-competition-add-member",
@@ -23,13 +24,11 @@ import { CompetitionService } from "../../service/competition.service";
 })
 export class CompetitionAddMemberComponent implements OnInit {
   @Input() competitionCode: number | null = null;
-  // Private
-  private _unsubscribeAll: Subject<any>;
   private tempData = [];
 
   // public
   public contentHeader: object;
-  public rows: any;
+  public memberAreNotInCompetition: any;
   public selected = [];
   public basicSelectedOption: number = 10;
   public ColumnMode = ColumnMode;
@@ -62,6 +61,16 @@ export class CompetitionAddMemberComponent implements OnInit {
     private competitionService: CompetitionService,
     private memberService: MemberService 
   ) {}
+
+  // get all members that are not in competition
+  getAllMemberNotInCompetition(competitionCode) {
+    this.memberService
+      .getAllMemberNotInCompetition(competitionCode)
+      .subscribe((memberAreNotInCompetition: any) => {
+        this.memberAreNotInCompetition = memberAreNotInCompetition;
+        this.tempData = memberAreNotInCompetition;
+      });
+  }
 
   ngOnInit(): void {}
 }
