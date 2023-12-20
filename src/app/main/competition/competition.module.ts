@@ -21,6 +21,7 @@ import { CompetitionListComponent} from "./pages/competition-list/competition-li
 import { CompetitionAddEditComponent} from "./pages/competition-add-edit/competition-add-edit.component";
 import { CompetitionItemComponent } from './pages/competition-item/competition-item.component';
 import { CompetitionCardlistComponent } from './pages/competition-cardlist/competition-cardlist.component';
+import { CompetitionAddMemberComponent } from './pages/competition-add-member/competition-add-member.component';
 
 const routes: Routes = [
     {
@@ -60,7 +61,8 @@ const routes: Routes = [
     CompetitionItemComponent,
     CompetitionCardlistComponent,
     CompetitionListComponent,
-    CompetitionAddEditComponent
+    CompetitionAddEditComponent,
+    CompetitionAddMemberComponent
   ],
   imports: [
     CommonModule,
