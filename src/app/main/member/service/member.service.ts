@@ -16,4 +16,9 @@ export class MemberService {
   getAllMember() {
     return this.http.get(environment.membersUrl);
   }
+
+  //get member by id
+  getMemberById(id) {
+    return this.http.get(environment.membersUrl + '/' + id);
+  }
 }
