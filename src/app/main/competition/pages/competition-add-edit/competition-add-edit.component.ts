@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import { Router } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { NgbDateStruct, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 
@@ -46,7 +46,7 @@ export class CompetitionAddEditComponent implements OnInit {
 
   constructor(
       private toastr: ToastrService,
-      private router: Router,
+      private route: ActivatedRoute,
       private competitionService: CompetitionService,
       private calendar: NgbCalendar,
       private formatter: NgbDateParserFormatter
@@ -93,6 +93,8 @@ export class CompetitionAddEditComponent implements OnInit {
             this.pageType = 'add';
             this.pageTitle = 'Add New Competition';
         } else {
+            this.competitionId = + (this.route.snapshot.paramMap.get('id'));
+            this.getCompetitionById(this.competitionId);
             this.pageType = 'edit';
             this.pageTitle = 'Edit Competition';
         }
@@ -179,6 +181,18 @@ export class CompetitionAddEditComponent implements OnInit {
     }
 
 
+    // git commit -m "add getCompetitionById method for getting competition by id"
+    getCompetitionById(id) {
+        this.competitionService.getCompetitionById(id).subscribe((response: any) => {
+            this.competitionCode = response.data.code;
+            this.competitionAmount = response.data.amount;
+            this.competitionDate = this.formatter.parse(response.data.date);
+            this.startTime = response.data.startTime;
+            this.endTime = response.data.endTime;
+            this.competitionLocation = response.data.location;
+            this.competitionNumberOfParticipants = response.data.numberOfParticipants;
+        });
+    }
     ngOnInit(): void {
   }
 
