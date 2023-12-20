@@ -21,4 +21,9 @@ export class MemberService {
   getMemberById(id) {
     return this.http.get(environment.membersUrl + '/' + id);
   }
+
+  //add new member
+  addMember(member) {
+    return this.http.post(environment.membersUrl, member);
+  }
 }
