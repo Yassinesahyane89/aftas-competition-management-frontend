@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {FlatpickrOptions} from "ng2-flatpickr";
 import {ActivatedRoute} from "@angular/router";
 import {CompetitionService} from "../../service/competition.service";
@@ -11,7 +11,8 @@ import { CustomToastrComponent } from '@core/components/custom-toastr/custom-toa
 @Component({
   selector: 'app-competition-form',
   templateUrl: './competition-form.component.html',
-  styleUrls: ['./competition-form.component.scss']
+  styleUrls: ['./competition-form.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CompetitionFormComponent implements OnInit {
 
@@ -32,7 +33,9 @@ export class CompetitionFormComponent implements OnInit {
       private competitionService: CompetitionService,
       private calendar: NgbCalendar,
       private formatter: NgbDateParserFormatter
-  ) { }
+  ) {
+    this.options = this.toastr.toastrConfig;
+  }
 
   // add isDisabled and isWeekend methods
   isDisabled = (date: NgbDate, current: { month: number; year: number }) => date.month !== current.month;
