@@ -32,5 +32,8 @@ export class MemberService {
     return this.http.put(environment.membersUrl + '/' + member.id, member);
   }
 
-  
+  //delete member
+  deleteMember(id) {
+    return this.http.delete(environment.membersUrl + '/' + id);
+  }
 }
