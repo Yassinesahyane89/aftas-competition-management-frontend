@@ -19,30 +19,31 @@ import { CustomToastrComponent } from '@core/components/custom-toastr/custom-toa
   encapsulation: ViewEncapsulation.None
 })
 export class CompetitionAddEditComponent implements OnInit {
-  public contentHeader: object;
+    public contentHeader: object;
+    public fromDate: NgbDate | null;
+    public toDate: NgbDate | null;
+    public   timeOptions: FlatpickrOptions = {
+        enableTime: true,
+        noCalendar: true,
+        altInput: true
+    }
+    public fileName = undefined;
+    public featuredImage: string;
+    isCompetitionCreated: boolean = false;
+    public pageType: string;
+    public pageTitle: string;
+    private toastRef: any;
+    private options: GlobalConfig;
 
-  public competitionId: number;
-  public competitionCode = "";
-  public competitionAmount : number;
-  public competitionNumberOfParticipants : number;
-  public competitionDate: NgbDateStruct;
-  public fromDate: NgbDate | null;
-  public toDate: NgbDate | null;
-  public startTime;
-  public endTime;
-  public competitionLocation = "";
-  public   timeOptions: FlatpickrOptions = {
-    enableTime: true,
-    noCalendar: true,
-    altInput: true
-  }
-  public fileName = undefined;
-  public featuredImage: string;
-  isCompetitionCreated: boolean = false;
-  public pageType: string;
-  public pageTitle: string;
-  private toastRef: any;
-  private options: GlobalConfig;
+    public competition: any = {
+        code: '',
+        amount: '',
+        date: '',
+        startTime: '',
+        endTime: '',
+        location: '',
+        numberOfParticipants: '',
+    };
 
   constructor(
       private toastr: ToastrService,
@@ -74,7 +75,7 @@ export class CompetitionAddEditComponent implements OnInit {
 
     // git commit -m "add formatTime method for formatting time"
     formatTime(time: NgbTimeStruct) {
-        return new Date(this.startTime).toLocaleTimeString('en-US', {
+        return new Date(this.competition.startTime).toLocaleTimeString('en-US', {
             hour12: false,
             hour: '2-digit',
             minute: '2-digit',
@@ -93,8 +94,8 @@ export class CompetitionAddEditComponent implements OnInit {
             this.pageType = 'add';
             this.pageTitle = 'Add New Competition';
         } else {
-            this.competitionId = + (this.route.snapshot.paramMap.get('id'));
-            this.getCompetitionById(this.competitionId);
+            this.competition.code = this.route.snapshot.paramMap.get('code');
+            this.getCompetitionById(this.competition.code);
             this.pageType = 'edit';
             this.pageTitle = 'Edit Competition';
         }
@@ -142,10 +143,13 @@ export class CompetitionAddEditComponent implements OnInit {
 
     // git commit -m "add methode addNewCompetition for adding new competition"
     addNewCompetition(form) {
-        this.competitionService.addCompetition({ amount: this.competitionAmount, date: this.formatDate(this.competitionDate), startTime: this.formatTime(this.startTime), endTime: this.formatTime(this.endTime), location: this.competitionLocation, numberOfParticipants: this.competitionNumberOfParticipants })
+        this.competition.startTime = this.formatTime(this.competition.startTime);
+        this.competition.endTime = this.formatTime(this.competition.endTime);
+        this.competition.date = this.formatDate(this.competition.date);
+        this.competitionService.addCompetition(this.competition)
             .subscribe((response :any) => {
                 this.handleSuccess(response,form);
-                this.competitionId = response.data.id;
+                this.competition.code = response.data.code;
             }, (error) => {
                 this.handleError(error,form);
             });
@@ -154,13 +158,13 @@ export class CompetitionAddEditComponent implements OnInit {
     // git commit -m "add methode updateCompetition for updating competition"
     updateCompetition(form) {
         this.competitionService.updateCompetition({
+            code: this.competitionCode,
             amount: this.competitionAmount,
             date: this.formatDate(this.competitionDate),
             startTime: this.formatTime(this.startTime),
             endTime: this.formatTime(this.endTime),
             location: this.competitionLocation,
-            numberOfParticipants:
-            this.competitionNumberOfParticipants, id: this.competitionId
+            numberOfParticipants: this.competitionNumberOfParticipants
         })
             .subscribe((response :any) => {
                 this.handleSuccess(response,form);
@@ -195,6 +199,7 @@ export class CompetitionAddEditComponent implements OnInit {
     }
     // git commit -m "add ngOnInit method"
     ngOnInit(): void {
+        this.featuredImage = "assets/images/illustration/fishing-competition.jpg";
         // check page type
         this.checkPageType();
 
