@@ -11,4 +11,9 @@ export class CompetitionService {
   constructor(
     private http: HttpClient
   ) { }
+
+  //get all competitions
+    getAllCompetition() {
+        return this.http.get(environment.competitionsUrl);
+    }
 }
