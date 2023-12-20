@@ -8,9 +8,7 @@ import { environment } from "../../../../environments/environment";
 export class MemberService {
   public MemberList: any;
 
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
   //get all members
   getAllMember() {
@@ -19,7 +17,7 @@ export class MemberService {
 
   //get member by id
   getMemberById(id) {
-    return this.http.get(environment.membersUrl + '/' + id);
+    return this.http.get(environment.membersUrl + "/" + id);
   }
 
   //add new member
@@ -29,11 +27,25 @@ export class MemberService {
 
   //update member
   updateMember(member) {
-    return this.http.put(environment.membersUrl + '/' + member.id, member);
+    return this.http.put(environment.membersUrl + "/" + member.id, member);
   }
 
   //delete member
   deleteMember(id) {
-    return this.http.delete(environment.membersUrl + '/' + id);
+    return this.http.delete(environment.membersUrl + "/" + id);
+  }
+
+  //get all members that are not in competition
+  getAllMemberNotInCompetition(competitionCode) {
+    return this.http.get(
+      environment.membersUrl + "/not-in-competition/" + competitionCode
+    );
+  }
+
+  //get all members that are in competition
+  getAllMemberInCompetition(competitionCode) {
+    return this.http.get(
+      environment.membersUrl + "/in-competition/" + competitionCode
+    );
   }
 }
