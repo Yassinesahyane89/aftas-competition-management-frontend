@@ -8,6 +8,7 @@ import { ContentHeaderModule } from 'app/layout/components/content-header/conten
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrModule } from 'ngx-toastr';
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
+import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 
 
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -20,6 +21,7 @@ import { CompetitionListComponent} from "./pages/competition-list/competition-li
 import { CompetitionAddEditComponent} from "./pages/competition-add-edit/competition-add-edit.component";
 import { CompetitionItemComponent } from './pages/competition-item/competition-item.component';
 import { CompetitionCardlistComponent } from './pages/competition-cardlist/competition-cardlist.component';
+import { CompetitionFormComponent } from './pages/competition-form/competition-form.component';
 
 const routes: Routes = [
     {
@@ -59,7 +61,8 @@ const routes: Routes = [
     CompetitionItemComponent,
     CompetitionCardlistComponent,
     CompetitionListComponent,
-    CompetitionAddEditComponent
+    CompetitionAddEditComponent,
+    CompetitionFormComponent
   ],
   imports: [
     CommonModule,
@@ -72,6 +75,7 @@ const routes: Routes = [
     ContentHeaderModule,
     ToastrModule,
     NgSelectModule,
+    Ng2FlatpickrModule
   ]
 })
 export class CompetitionModule { }
