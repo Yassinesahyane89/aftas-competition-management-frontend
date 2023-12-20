@@ -29,7 +29,7 @@ export class CompetitionService {
 
     // update competition
     updateCompetition(competition) {
-        return this.http.put(environment.competitionsUrl + '/' + competition.id, competition);
+        return this.http.put(environment.competitionsUrl + '/' + competition.code, competition);
     }
 
     // delete competition
