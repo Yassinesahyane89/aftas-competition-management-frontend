@@ -15,7 +15,6 @@ export class CompetitionItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-     console.log("competition", this.competition);
      const dateParts = this.competition.date.split(", ");
      this.dayOfWeek = dateParts[0];
      this.dayOfMonth = dateParts[1].split(" ")[1];
