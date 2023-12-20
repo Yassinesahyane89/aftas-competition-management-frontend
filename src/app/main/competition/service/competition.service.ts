@@ -6,14 +6,19 @@ import {environment} from "../../../../environments/environment";
   providedIn: 'root'
 })
 export class CompetitionService {
-  public CompetitionList: any ;
+    public CompetitionList: any ;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+    constructor(
+      private http: HttpClient
+    ) { }
 
-  //get all competitions
+    //get all competitions
     getAllCompetition() {
         return this.http.get(environment.competitionsUrl);
+    }
+
+    //get competition by id
+    getCompetitionById(id) {
+        return this.http.get(environment.competitionsUrl + '/' + id);
     }
 }
