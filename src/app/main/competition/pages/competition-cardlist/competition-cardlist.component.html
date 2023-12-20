@@ -1,1 +1,106 @@
-<p>competition-cardlist works!</p>
+<div class="content-wrapper container-xxl overflow-hidden p-0">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <div class="content-body">
+        <!-- Competition Head Section Starts -->
+        <section id="ecommerce-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ecommerce-header-items">
+                        <div class="result-toggler">
+                            <div class="search-results">{{ (competitions | filter: searchText:'code').length }} results found</div>
+                        </div>
+                        <div class="view-options d-flex">
+                            <div class="btn-group dropdown-sort" ngbDropdown>
+                                <button
+                                        ngbDropdownToggle
+                                        type="button"
+                                        class="btn btn-outline-primary mr-1"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                        rippleEffect
+                                >
+                                    <span class="active-sorting">Filter</span>
+                                </button>
+                                <div ngbDropdownMenu>
+                                    <a ngbDropdownItem href="javascript:void(0);" (click)="sortCompetitions('featured')">open</a>
+                                    <a ngbDropdownItem href="javascript:void(0);" (click)="sortCompetitions('price-asc')">in progress</a>
+                                    <a ngbDropdownItem href="javascript:void(0);" (click)="sortCompetitions('price-asc')">finished</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ecommerce-searchbar" class="ecommerce-searchbar">
+            <div class="row mt-1">
+                <div class="col-sm-12">
+                    <div class="input-group input-group-merge">
+                        <input
+                                type="text"
+                                class="form-control search-product"
+                                id="shop-search"
+                                placeholder="Search Product"
+                                aria-label="Search..."
+                                aria-describedby="shop-search"
+                                [(ngModel)]="searchText"
+                        />
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i data-feather="search" class="text-muted"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Competition Head Section Starts -->
+
+        <!-- Competition Products Starts -->
+        <section class="grid-view">
+                <app-competition-item
+                        class="card ecommerce-card"
+                        [competition]="competition"
+                        *ngFor="
+                                let competition of competitions
+                                | filter: searchText:'name'
+                                | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize
+                        "
+                ></app-competition-item>
+        </section>
+        <!-- Competition Products Ends -->
+
+        <!-- Competition Pagination Starts -->
+        <section id="ecommerce-pagination">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="d-flex justify-content-center">
+                        <ngb-pagination
+                                [collectionSize]="(competitions | filter: searchText:'code').length"
+                                [(page)]="page"
+                                [maxSize]="5"
+                                [rotate]="true"
+                                [ellipses]="false"
+                                [boundaryLinks]="true"
+                        >
+                            <!-- Custom pagination icons -->
+                            <ng-template ngbPaginationPrevious
+                            ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'" [size]="18"></span>
+                            </ng-template>
+                            <ng-template ngbPaginationFirst
+                            ><span [data-feather]="'chevrons-left'" [class]="'font-weight-bolder'" [size]="18"></span>
+                            </ng-template>
+                            <ng-template ngbPaginationNext
+                            ><span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'" [size]="18"></span
+                            ></ng-template>
+                            <ng-template ngbPaginationLast
+                            ><span [data-feather]="'chevrons-right'" [class]="'font-weight-bolder'" [size]="18"></span>
+                            </ng-template>
+                        </ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Competition Pagination Ends -->
+    </div>
+</div>

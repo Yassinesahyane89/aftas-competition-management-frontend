@@ -115,7 +115,7 @@
                         <li ngbNavItem [disabled]="!isCompetitionCreated">
                             <a ngbNavLink class="d-flex align-items-center"><i  class="mr-sm-50"></i><span class="d-none d-sm-block">Competition Participants</span></a>
                             <ng-template ngbNavContent>
-                                <app-competition2-add-member *ngIf="isCompetitionCreated" [competitionId]="competitionId"></app-competition2-add-member>
+                                <app-competition-add-member *ngIf="isCompetitionCreated" [competitionId]="competitionId"></app-competition-add-member>
                             </ng-template>
                         </li>
                     </ul>
