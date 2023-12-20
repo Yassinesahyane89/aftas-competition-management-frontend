@@ -73,9 +73,8 @@ export class CompetitionAddMemberComponent implements OnInit {
     private competitionService: CompetitionService,
     private memberService: MemberService
   ) {
-        this.options = this.toastr.toastrConfig;
+    this.options = this.toastr.toastrConfig;
   }
-
 
   // handle success case
   handleSuccess(response, form) {
@@ -93,6 +92,29 @@ export class CompetitionAddMemberComponent implements OnInit {
 
     // reset form
     form.reset();
+  }
+
+  // handle error case
+  handleError(error, form) {
+    if (error.error && error.error.message) {
+      const customToastrRef = cloneDeep(this.options);
+      customToastrRef.toastComponent = CustomToastrComponent;
+      customToastrRef.closeButton = true;
+      customToastrRef.tapToDismiss = false;
+      customToastrRef.progressBar = true;
+      customToastrRef.toastClass = "toast ngx-toastr";
+      this.toastr.error(error.error.message, "Error!", customToastrRef);
+    } else if (error && error.error) {
+      const validationErrors = error.error;
+
+      Object.keys(validationErrors).forEach((key) => {
+        const control = form.controls[key];
+        if (control) {
+          control.setErrors({ serverError: validationErrors[key].join(", ") });
+        }
+        console.log(form.controls["point"]);
+      });
+    }
   }
 
   // get all members that are not in competition
