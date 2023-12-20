@@ -1,9 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../../environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class MemberService {
+  public MemberList: any;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) {}
+
+  //get all members
+  getAllMember() {
+    return this.http.get(environment.membersUrl);
+  }
 }
