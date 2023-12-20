@@ -8,6 +8,7 @@ export const environment = {
   apiUrl: 'http://localhost:4000',
   levelsUrl: 'http://localhost:8080/api/v1/levels',
   fishsUrl: 'http://localhost:8080/api/v1/fishes',
+  competitionsUrl: 'http://localhost:8080/api/v1/competitions',
 };
 
 /*
