@@ -127,5 +127,54 @@ export class CompetitionAddMemberComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {}
+  // add new member
+  addNewMember(form) {
+    this.competitionService
+      .registerMemberToCompetition({
+        competitionCode: this.competitionCode,
+        memberId: this.selected,
+      })
+      .subscribe(
+        (response: any) => {
+          this.handleSuccess(response, form);
+        },
+        (error) => {
+          this.handleError(error, form);
+        }
+      );
+  }
+
+  // submit form
+  submit(form) {
+    this.addNewMember(form);
+  }
+
+  ngOnInit(): void {
+    this.getAllMemberNotInCompetition(this.competitionCode);
+
+    // content header
+    this.contentHeader = {
+      headerTitle: "Datatables",
+      actionButton: true,
+      breadcrumb: {
+        type: "",
+        links: [
+          {
+            name: "Home",
+            isLink: true,
+            link: "/",
+          },
+          {
+            name: "Forms & Tables",
+            isLink: true,
+            link: "/",
+          },
+          {
+            name: "Datatables",
+            isLink: false,
+          },
+        ],
+      },
+    };
+  }
 }
