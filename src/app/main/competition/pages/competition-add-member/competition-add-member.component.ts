@@ -6,6 +6,8 @@ import {
   Input,
 } from "@angular/core";
 
+import { ActivatedRoute, Router } from "@angular/router";
+
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import {
@@ -15,6 +17,12 @@ import {
 } from "@swimlane/ngx-datatable";
 import { CompetitionService } from "../../service/competition.service";
 import { MemberService } from "app/main/member/service/member.service";
+
+
+// lodash
+import { cloneDeep } from 'lodash';
+import { ToastrService, GlobalConfig } from 'ngx-toastr';
+import { CustomToastrComponent } from '@core/components/custom-toastr/custom-toastr.component';
 
 @Component({
   selector: "app-competition-add-member",
@@ -35,6 +43,7 @@ export class CompetitionAddMemberComponent implements OnInit {
   public expanded = {};
   public chkBoxSelected = [];
   public SelectionType = SelectionType;
+  private options: GlobalConfig;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   @ViewChild("tableRowDetails") tableRowDetails: any;
 
@@ -58,9 +67,33 @@ export class CompetitionAddMemberComponent implements OnInit {
   }
 
   constructor(
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
+    private router: Router,
     private competitionService: CompetitionService,
-    private memberService: MemberService 
-  ) {}
+    private memberService: MemberService
+  ) {
+        this.options = this.toastr.toastrConfig;
+  }
+
+
+  // handle success case
+  handleSuccess(response, form) {
+    // redirect to list page /level/list
+    this.router.navigate(["/fish/list"]).then((r) => console.log(r));
+
+    // Handle success case
+    const customToastrRef = cloneDeep(this.options);
+    customToastrRef.toastComponent = CustomToastrComponent;
+    customToastrRef.closeButton = true;
+    customToastrRef.tapToDismiss = false;
+    customToastrRef.progressBar = true;
+    customToastrRef.toastClass = "toast ngx-toastr";
+    this.toastr.success(response.message, "Success!", customToastrRef);
+
+    // reset form
+    form.reset();
+  }
 
   // get all members that are not in competition
   getAllMemberNotInCompetition(competitionCode) {
