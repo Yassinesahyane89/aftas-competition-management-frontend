@@ -18,8 +18,8 @@ export class CompetitionService {
     }
 
     //get competition by id
-    getCompetitionById(id) {
-        return this.http.get(environment.competitionsUrl + '/' + id);
+    getCompetitionById(code) {
+        return this.http.get(environment.competitionsUrl + '/' + code);
     }
 
     // add competition
