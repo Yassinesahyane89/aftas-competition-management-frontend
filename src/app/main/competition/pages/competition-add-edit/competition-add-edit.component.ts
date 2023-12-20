@@ -45,6 +45,19 @@ export class CompetitionAddEditComponent implements OnInit {
   isDisabled = (date: NgbDate, current: { month: number; year: number }) => date.month !== current.month;
   isWeekend = (date: NgbDate) => this.calendar.getWeekday(date) >= 6;
 
+  // git commit -m "add uploadImage method"
+    uploadImage(event: any) {
+        if (event.target.files && event.target.files[0]) {
+        let reader = new FileReader();
+
+        reader.onload = (event: any) => {
+            this.featuredImage = event.target.result;
+        };
+
+        this.fileName = event.target.files[0].name;
+        reader.readAsDataURL(event.target.files[0]);
+        }
+    }
   ngOnInit(): void {
   }
 
