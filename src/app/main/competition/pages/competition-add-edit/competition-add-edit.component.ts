@@ -58,6 +58,16 @@ export class CompetitionAddEditComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
         }
     }
+
+    // git commit -m "add formatTime method for formatting time"
+    formatTime(time: NgbTimeStruct) {
+        return new Date(this.startTime).toLocaleTimeString('en-US', {
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+    }
   ngOnInit(): void {
   }
 
