@@ -9,6 +9,7 @@ export const environment = {
   levelsUrl: 'http://localhost:8080/api/v1/levels',
   fishsUrl: 'http://localhost:8080/api/v1/fishes',
   competitionsUrl: 'http://localhost:8080/api/v1/competitions',
+  membersUrl: 'http://localhost:8080/api/v1/members',
 };
 
 /*
