@@ -68,7 +68,13 @@ export class CompetitionAddEditComponent implements OnInit {
             second: '2-digit'
         });
     }
-  ngOnInit(): void {
+
+    // git commit -m "add formatDate method for formatting date"
+    formatDate(date: NgbDateStruct) {
+        return new Date(date.year, date.month - 1, date.day).toISOString().split('T')[0];
+    }
+
+    ngOnInit(): void {
   }
 
 }
