@@ -26,4 +26,11 @@ export class MemberService {
   addMember(member) {
     return this.http.post(environment.membersUrl, member);
   }
+
+  //update member
+  updateMember(member) {
+    return this.http.put(environment.membersUrl + '/' + member.id, member);
+  }
+
+  
 }
