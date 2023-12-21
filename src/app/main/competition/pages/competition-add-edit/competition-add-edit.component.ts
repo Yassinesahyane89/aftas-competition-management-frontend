@@ -11,6 +11,7 @@ import { CompetitionService } from "../../service/competition.service";
 import { cloneDeep } from 'lodash';
 import { ToastrService, GlobalConfig } from 'ngx-toastr';
 import { CustomToastrComponent } from '@core/components/custom-toastr/custom-toastr.component';
+import {any} from "codelyzer/util/function";
 @Component({
   selector: "app-competition-add-edit",
   templateUrl: "./competition-add-edit.component.html",
@@ -38,6 +39,7 @@ export class CompetitionAddEditComponent implements OnInit {
   public endTime;
   public location: string;
   public isCompetitionCreated: boolean = false;
+  public isCompetitionEnded1: boolean = false;
 
   constructor(
     private toastr: ToastrService,
@@ -202,10 +204,18 @@ export class CompetitionAddEditComponent implements OnInit {
     } else {
       this.code = this.route.snapshot.paramMap.get("id");
       this.getCompetitionById(this.code);
-      this.isCompetitionCreated = true; 
+      this.isCompetitionCreated = true;
+      this.isCompetitionEndedMethod();
       this.pageType = "edit";
       this.pageTitle = "Edit Competition";
     }
+  }
+
+  isCompetitionEndedMethod() {
+    console.log(this.code);
+    this.competitionService.isCompetitionEnded(this.code).subscribe((response: any) => {
+      this.isCompetitionEnded1 = response.data;
+    });
   }
 
   // add getCompetitionById method for getting competition by id

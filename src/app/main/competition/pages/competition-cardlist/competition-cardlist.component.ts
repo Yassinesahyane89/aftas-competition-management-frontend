@@ -22,7 +22,9 @@ export class CompetitionCardlistComponent implements OnInit {
   constructor(private CompetitionService: CompetitionService) {}
 
   sortCompetitions(key) {
-    this.competitions.sort(key);
+    this.CompetitionService.getCompetitionByFilter(key).subscribe((competitions: any) => {
+        this.competitions = competitions.data;
+    });
   }
 
   // get all competitions

@@ -7,7 +7,7 @@ export class InitialsPipe implements PipeTransform {
   transform(fullName: string): any {
     return fullName
       ?.split(' ')
-      .map(n => n[0])
+      .map(n => n[0].toUpperCase())
       .join('');
   }
 }

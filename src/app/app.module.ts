@@ -19,6 +19,7 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import {CustomToastrComponent} from "../@core/components/custom-toastr/custom-toastr.component";
+import { RankingComponent } from './main/ranking/service/ranking/ranking.component';
 
 const appRoutes: Routes = [
   {
@@ -49,7 +50,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent,CustomToastrComponent],
+  declarations: [AppComponent,CustomToastrComponent, RankingComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

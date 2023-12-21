@@ -8,8 +8,6 @@ import {
 
 import { ActivatedRoute, Router } from "@angular/router";
 
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
 import {
   ColumnMode,
   DatatableComponent,
@@ -79,7 +77,7 @@ export class CompetitionAddMemberComponent implements OnInit {
   // handle success case
   handleSuccess(response) {
     // redirect to list page /level/list
-    this.router.navigate(["/fish/list"]).then((r) => console.log(r));
+    this.router.navigate(["/competition/edit/" + this.competitionCode]);
 
     // Handle success case
     const customToastrRef = cloneDeep(this.options);
@@ -109,17 +107,18 @@ export class CompetitionAddMemberComponent implements OnInit {
     this.memberService
       .getAllMemberNotInCompetition(competitionCode)
       .subscribe((memberAreNotInCompetition: any) => {
-        this.memberAreNotInCompetition = memberAreNotInCompetition;
+        this.memberAreNotInCompetition = memberAreNotInCompetition.data;
         this.tempData = memberAreNotInCompetition;
       });
   }
 
   // add new member
   addNewMember() {
+    const memberIds = this.selected.map((member) => member.membershipNumber);
     this.competitionService
       .registerMemberToCompetition({
         competitionCode: this.competitionCode,
-        memberId: this.selected,
+        memberIds: memberIds,
       })
       .subscribe(
         (response: any) => {
@@ -137,6 +136,7 @@ export class CompetitionAddMemberComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.competitionCode);
     this.getAllMemberNotInCompetition(this.competitionCode);
 
     // content header

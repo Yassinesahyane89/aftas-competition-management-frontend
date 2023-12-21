@@ -38,8 +38,7 @@ export class MemberService {
   //get all members that are not in competition
   getAllMemberNotInCompetition(competitionCode) {
     return this.http.get(
-      environment.membersUrl + "/not-in-competition/" + competitionCode
-    );
+      environment.membersUrl + "/not-in-competition/" + competitionCode);
   }
 
   //get all members that are in competition

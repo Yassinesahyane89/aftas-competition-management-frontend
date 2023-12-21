@@ -22,6 +22,8 @@ import { CompetitionAddEditComponent} from "./pages/competition-add-edit/competi
 import { CompetitionItemComponent } from './pages/competition-item/competition-item.component';
 import { CompetitionCardlistComponent } from './pages/competition-cardlist/competition-cardlist.component';
 import { CompetitionAddMemberComponent } from './pages/competition-add-member/competition-add-member.component';
+import { CompetitionAddResultComponent } from './pages/competition-add-result/competition-add-result.component';
+import { CompetitionAddResult2Component } from './pages/competition-add-result2/competition-add-result2.component';
 
 const routes: Routes = [
     {
@@ -50,6 +52,16 @@ const routes: Routes = [
         data: { animation: "CompetitionAddEditComponent" },
     },
     {
+        path: "add-member/:id",
+        component: CompetitionAddMemberComponent,
+        data: { animation: "CompetitionAddMemberComponent" },
+    },
+    {
+        path: "add-result/:id",
+        component: CompetitionAddResultComponent,
+        data: { animation: "CompetitionAddResultComponent" },
+    },
+    {
         path: "**",
         redirectTo: "list",
         pathMatch: "full",
@@ -62,7 +74,9 @@ const routes: Routes = [
     CompetitionCardlistComponent,
     CompetitionListComponent,
     CompetitionAddEditComponent,
-    CompetitionAddMemberComponent
+    CompetitionAddMemberComponent,
+    CompetitionAddResultComponent,
+    CompetitionAddResult2Component
   ],
   imports: [
     CommonModule,

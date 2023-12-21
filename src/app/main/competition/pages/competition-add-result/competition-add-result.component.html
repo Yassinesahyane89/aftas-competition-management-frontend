@@ -1,0 +1,126 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+        <!-- Result List -->
+        <section class="users-list-wrapper">
+            <!-- Add result -->
+            <div class="card">
+                <h5 class="card-header">Search Filter</h5>
+                <div class="card-body">
+                    <div class="users-list-filter">
+                        <form class="form-horizontal" id="form-search" name="form-search" (onSubmit)="resultForm.form.valid" #resultForm="ngForm">
+                            <div class="row mb-1">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="fish">Fish</label>
+                                        <select class="form-control" [(ngModel)]="selectedFishId" name="fishId" id="fish">
+                                            <option *ngFor="let fish of fishList" [value]="fish.id">{{ fish.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="member">Member</label>
+                                        <select class="form-control" [(ngModel)]="selectedMemberId" name="memberId" id="member">
+                                            <option *ngFor="let rank of memberAreInCompetition" [value]="rank.member.membershipNumber">{{ rank.member.FullName }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="basic-icon-default-averageWeight">AverageWeight</label>
+                                        <input
+                                                type="number"
+                                                id="basic-icon-default-averageWeight"
+                                                class="form-control dt-averageWeight"
+                                                placeholder="enter averageWeight"
+                                                aria-label="averageWeight"
+                                                aria-describedby="basic-icon-default-averageWeight2"
+                                                name="averageWeight"
+                                                [(ngModel)]="averageWeight"
+                                                required
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-1" (click)="submit(resultForm)" rippleEffect>Submit</button>
+                            <button type="reset" class="btn btn-outline-secondary" rippleEffect><a routerLink='/fish/list'>Cancel</a></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Add result -->
+
+            <div class="card">
+                <h4 class="card-title m-2">Member List</h4>
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <div class="d-flex justify-content-between align-items-center m-1">
+                            <label class="d-flex align-items-center">Show
+                                <select class="form-control mx-25" [(ngModel)]="basicSelectedOption">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                entries</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end">
+                        <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
+                            <label class="d-flex align-items-center ml-1 ml-md-0"
+                            >Search<input
+                                    type="search"
+                                    placeholder="Search"
+                                    class="form-control ml-25"
+                                    (keyup)="filterUpdate($event)"
+                                    (search)="filterUpdate($event)"
+                            /></label>
+                            <button class="btn btn-primary ml-1" (click)="submit1()"><i data-feather="plus" class="mr-0 mr-sm-1"></i
+                            ><span class="d-none d-sm-inline-block">Add To Competition</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <ngx-datatable [rows]="memberAreInCompetition" [rowHeight]="58" class="bootstrap core-bootstrap" [limit]="10" [columnMode]="ColumnMode.force" [headerHeight]="40" [footerHeight]="50" [scrollbarH]="true" [selectionType]="SelectionType.checkbox" [limit]="basicSelectedOption" (activate)="onActivate($event)" (select)="onSelect($event)">
+                    <ngx-datatable-column [width]="70" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+                        <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" id="headerChkbxRef"/>
+                                <label class="custom-control-label" for="headerChkbxRef"></label>
+                            </div>
+                        </ng-template>
+                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" id="rowChkbxRef{{ rowIndex }}"/>
+                                <label class="custom-control-label" for="rowChkbxRef{{ rowIndex }}"></label>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Name" prop="member.FullName" [width]="200">
+                        <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
+                            <div class="d-flex align-items-center">
+                                <div *ngIf="row.avatar; else customAvatar" class="avatar mr-1">
+                                    <img class="rounded-circle mr-1" src="assets/images/portrait/small/{{ row.avatar }}" height="32" width="32" alt="datatable-avatar"/>
+                                </div>
+                                <ng-template #customAvatar>
+                                    <div class="avatar mr-1 ml-0 bg-light-primary">
+                                        <div class="avatar-content">{{ name | initials }}</div>
+                                    </div>
+                                </ng-template>
+                                <div class="cell-line-height">
+                                    <p class="font-medium-1 font-weight-bold line-height-1 mb-25">{{ name }}</p>
+                                    <span class="text-muted font-small-2"> {{ row.member.nationality }}</span>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Competition" prop="competition.code" [width]="120"></ngx-datatable-column>
+                    <ngx-datatable-column name="Score" prop="score" [width]="150"></ngx-datatable-column>
+                    <ngx-datatable-column name="Rank" prop="rank" [width]="250"></ngx-datatable-column>
+                    <ngx-datatable-column name="Date" prop="competition.date" [width]="120"></ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </section>
+        <!--/ Result List -->
+    </div>
+</div>
